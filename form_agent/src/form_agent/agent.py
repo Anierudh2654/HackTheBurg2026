@@ -14,9 +14,11 @@ from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
 from form_agent.inspector import (
+    FINAL_ACTION,
     click_navigation,
     find_forward_action,
     gate_reason,
@@ -25,14 +27,20 @@ from form_agent.inspector import (
     fill_values,
     required_missing,
 )
-from form_agent.mapper import map_prompt_to_fields
+from form_agent.mapper import is_mappable_field, map_explicit_prompt_choices, map_prompt_to_fields
 from form_agent.modes import (
+    choose_run_mode,
     retain_pdf_grounded_answers,
     should_fill_form,
     validate_model_config,
     validate_run_mode,
 )
 from form_agent.pdf_rag import PdfDocument, get_documents, retrieve_context
+from form_agent.pdf_forms import add_template, fill_template, remove_template
+from form_agent.web_pdf import (
+    PdfDownloadCancelled, PdfDownloadIntervention, collect_links, choose_link,
+    download_pdf, looks_like_pdf, wants_pdf_output,
+)
 
 load_dotenv()
 
@@ -45,7 +53,7 @@ FICTIONAL_MARKERS = re.compile(r"\bfictional\b|\bsynthetic\b|\bdemo[- ]only\b|no
 SEC_TCR_URL = "https://www.sec.gov/welcome-tips-complaints-and-referrals"
 EXPLICIT_URL = re.compile(r"https?://[^\s<>\"']+", re.I)
 DOMAIN_URL = re.compile(
-    r"(?<![@\w])(?:www\.)?[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?"
+    r"(?<![@\w.])(?:www\.)?[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?"
     r"(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+"
     r"(?:/[^\s<>\"']*)?",
     re.I,
@@ -62,7 +70,8 @@ def resolve_destination(prompt: str) -> tuple[str, str | None]:
     explicit = EXPLICIT_URL.search(prompt)
     if explicit:
         return explicit.group(0).rstrip(".,;:!?)]}"), None
-    domain = DOMAIN_URL.search(prompt)
+    domain = next((match for match in DOMAIN_URL.finditer(prompt)
+                   if not re.search(r"\.(?:pdf|docx?|xlsx?|csv|txt)$", match.group(0), re.I)), None)
     if domain:
         value = domain.group(0).rstrip(".,;:!?)]}")
         return (value if value.startswith(("http://", "https://")) else f"https://{value}"), None
@@ -84,6 +93,10 @@ def resolve_destination(prompt: str) -> tuple[str, str | None]:
     if site_hint:
         query = site_hint.group(1).strip()
         if query and query.casefold() not in {"this", "that", "the", "a"}:
+            return f"https://www.google.com/search?q={quote_plus(query)}", query
+    if wants_pdf_output(prompt):
+        query = re.split(r"[\n!?]|\.(?:\s|$)", prompt.strip(), maxsplit=1)[0][:400].strip()
+        if query:
             return f"https://www.google.com/search?q={quote_plus(query)}", query
     raise ValueError("Tell the agent which site to open: include its URL/domain or say 'go to [site name]' in the prompt.")
 def validate_url(url: str) -> str:
@@ -126,6 +139,9 @@ class AgentRun:
     required_missing: list[str] = field(default_factory=list)
     retrieved_sources: list[dict] = field(default_factory=list)
     field_sources: list[dict] = field(default_factory=list)
+    pdf_result: dict | None = None
+    pdf_source_url: str = ""
+    visited_pdf_pages: set[str] = field(default_factory=set, repr=False)
     handoff_reason: str | None = None
     handoff_context: dict | None = None
     error: str | None = None
@@ -160,6 +176,8 @@ class AgentRun:
                 "required_missing": list(self.required_missing),
                 "retrieved_sources": list(self.retrieved_sources),
                 "field_sources": list(self.field_sources),
+                "pdf_result": dict(self.pdf_result) if self.pdf_result else None,
+                "pdf_source_url": self.pdf_source_url,
                 "handoff_reason": self.handoff_reason,
                 "handoff_context": dict(self.handoff_context) if self.handoff_context else None,
                 "error": self.error,
@@ -177,7 +195,7 @@ def active_run() -> AgentRun | None:
 
 
 def start_run(prompt: str, document_ids: list[str] | None = None,
-              mode: str = "navigate_only") -> AgentRun:
+              mode: str | None = None) -> AgentRun:
     global _active
     if not prompt.strip():
         raise ValueError("Enter a user prompt")
@@ -190,6 +208,7 @@ def start_run(prompt: str, document_ids: list[str] | None = None,
     url, target_query = resolve_destination(prompt)
     url = validate_url(url)
     documents = get_documents(document_ids or [])
+    mode = mode or choose_run_mode(url, bool(documents))
     validate_run_mode(mode, url, bool(documents))
     validate_model_config(mode, model, key)
     with _state_lock:
@@ -332,15 +351,17 @@ def _bring_chrome_to_front(driver) -> bool:
 
 
 def _wait_for_user(run: AgentRun, reason: str, message: str,
-                   fields=None, navs=None, title: str = "") -> bool:
+                   fields=None, navs=None, title: str = "", approval_url: str | None = None) -> bool:
     chrome_focused = _bring_chrome_to_front(run.driver)
     if not chrome_focused:
         message += " Chrome could not be confirmed in front; use Alt+Tab to switch to its window."
-    current_url = getattr(run.driver, "current_url", "") if run.driver else run.current_url
+    current_url = approval_url or (getattr(run.driver, "current_url", "") if run.driver else run.current_url)
     context_fields = []
     for item in fields or []:
         context_fields.append({
             "label": item.label,
+            "tag": item.tag,
+            "field_type": item.field_type,
             "required": item.required,
             "options": list(item.options),
             "already_filled": item.already_filled,
@@ -364,7 +385,7 @@ def _wait_for_user(run: AgentRun, reason: str, message: str,
     while not run.stop_event.is_set():
         if run.resume_event.wait(timeout=1):
             run.resume_event.clear()
-            current = getattr(run.driver, "current_url", "") if run.driver else ""
+            current = approval_url or (getattr(run.driver, "current_url", "") if run.driver else "")
             host = (urlparse(current).hostname or "").lower()
             if host:
                 run.approved_hosts.add(host)
@@ -517,8 +538,63 @@ def _find_task_navigation(navs: list[dict], prompt: str) -> dict | None:
     return ranked[0][1]
 
 
+def _complete_web_pdf(run: AgentRun, pdf_url: str) -> bool:
+    """Download and fill a discovered document, then wait with its download ready."""
+    def approve(url: str) -> bool:
+        if _host_is_approved(run, url):
+            return True
+        return _wait_for_user(run, "new_site",
+            f"The PDF is hosted at {safe_display_url(url)}. Review this destination, then press Resume to allow the download.",
+            approval_url=url)
+
+    with run.lock:
+        run.status = "downloading_pdf"
+    run.record("pdf_download", f"Downloading {safe_display_url(pdf_url)}")
+    driver = run.driver
+    try:
+        content, filename, source_url = download_pdf(pdf_url, approve=approve,
+            cancelled=run.stop_event.is_set, cookies=driver.get_cookies() if driver else [],
+            browser_host=(urlparse(getattr(driver, "current_url", "")).hostname or ""),
+            local_origin=run.start_url)
+    except PdfDownloadIntervention as exc:
+        if driver:
+            driver.get(exc.url)
+        _wait_for_user(run, "pdf_access", str(exc))
+        return False
+    except PdfDownloadCancelled:
+        with run.lock:
+            run.status = "stopped"
+        return True
+    if run.stop_event.is_set():
+        return True
+    with run.lock:
+        run.status = "filling_pdf"
+        run.pdf_source_url = safe_display_url(source_url)
+    run.record("pdf_fill", "PDF downloaded. Filling source-supported answers from your prompt and reference PDFs.")
+    template = add_template(filename, content)
+    try:
+        result = fill_template(template["template_id"], run.prompt, [doc.document_id for doc in run.documents])
+    finally:
+        remove_template(template["template_id"])
+    if run.stop_event.is_set():
+        return True
+    with run.lock:
+        run.pdf_result = result
+        run.filled_fields = [item["field"] for item in result["filled_fields"]]
+        run.status = "pdf_ready"
+        run.handoff_context = None
+        run.handoff_reason = None
+    run.record("pdf_ready", f"Your editable PDF is ready to download: {result['filled_count']} fields filled, {len(result['remaining_fields'])} left for you. Review it; Close ends the browser session.")
+    while not run.stop_event.wait(.5):
+        pass
+    with run.lock:
+        run.status = "stopped"
+    return True
+
+
 def _run_browser(run: AgentRun) -> None:
     driver = None
+    pdf_task = should_fill_form(run.mode) and (wants_pdf_output(run.prompt) or looks_like_pdf(run.start_url))
     try:
         run.record("browser", "Launching visible Chrome through Selenium Manager")
         driver = _chrome_driver()
@@ -529,8 +605,12 @@ def _run_browser(run: AgentRun) -> None:
                 run.status = "stopped"
                 run.message = "Browser session stopped before navigation"
             return
-        driver.get(run.start_url)
         run.approved_hosts.add((urlparse(run.start_url).hostname or "").lower())
+        if pdf_task and looks_like_pdf(run.start_url):
+            if _complete_web_pdf(run, run.start_url):
+                return
+        else:
+            driver.get(run.start_url)
 
         for page_no in range(1, MAX_PAGES + 1):
             if run.stop_event.is_set():
@@ -543,7 +623,11 @@ def _run_browser(run: AgentRun) -> None:
                 if not _wait_for_user(run, "new_site", f"Chrome opened {host}. Review the destination and press Resume to authorize this site for this run."):
                     break
                 continue
-            if run.mode == "sec_pdf_assist" and (host == "sec.gov" or host.endswith(".sec.gov")) and FICTIONAL_MARKERS.search(run.prompt):
+            if pdf_task and looks_like_pdf(url):
+                if _complete_web_pdf(run, url):
+                    return
+                continue
+            if should_fill_form(run.mode) and (host == "sec.gov" or host.endswith(".sec.gov")) and FICTIONAL_MARKERS.search(run.prompt):
                 raise RuntimeError("Refusing to enter fictional/demo facts into the live SEC TCR system. Test only with truthful information on a live government form.")
 
             fields, navs, title, body, password_present = inspect_page(driver)
@@ -560,6 +644,22 @@ def _run_browser(run: AgentRun) -> None:
                 continue
 
             if run.target_query and host in {"google.com", "www.google.com"} and urlparse(url).path == "/search":
+                if pdf_task:
+                    links = collect_links(driver.page_source, url, run.visited_pdf_pages)
+                    selected = choose_link(run.prompt, title, links)
+                    if selected:
+                        run.target_query = None
+                        if selected["pdf"]:
+                            if _complete_web_pdf(run, selected["url"]):
+                                return
+                        else:
+                            driver.get(selected["url"])
+                            run.record("pdf_navigation", f"Opened the matching search result: {safe_display_url(selected['url'])}")
+                        continue
+                    if not _wait_for_user(run, "search_result", "I couldn't identify the requested form in the search results. Open its official page or PDF in Chrome, then press Resume.", fields, navs, title):
+                        break
+                    run.target_query = None
+                    continue
                 result = _open_best_search_result(driver, run.target_query)
                 if not result:
                     if not _wait_for_user(
@@ -575,7 +675,23 @@ def _run_browser(run: AgentRun) -> None:
                 time.sleep(0.6)
                 continue
 
-            if is_review_page(navs, title, body):
+            if pdf_task:
+                run.visited_pdf_pages.add(url)
+                links = collect_links(driver.page_source, url, run.visited_pdf_pages)
+                selected = choose_link(run.prompt, title, links)
+                if selected:
+                    if selected["pdf"]:
+                        if _complete_web_pdf(run, selected["url"]):
+                            return
+                    else:
+                        run.record("pdf_navigation", f"Following {selected['label']}: {safe_display_url(selected['url'])}")
+                        driver.get(selected["url"])
+                    continue
+                if not _wait_for_user(run, "pdf_link", "I couldn't identify the requested PDF unambiguously. Open the correct form page or PDF in Chrome, then press Resume.", fields, navs, title):
+                    break
+                continue
+
+            if is_review_page(navs, title, body, allow_final_action=False):
                 chrome_focused = _bring_chrome_to_front(driver)
                 with run.lock:
                     run.status = "review_ready"
@@ -584,7 +700,8 @@ def _run_browser(run: AgentRun) -> None:
                         "url": safe_display_url(url), "title": title,
                         "inspected": True,
                         "chrome_focused": chrome_focused,
-                        "fields": [{"label": f.label, "required": f.required,
+                        "fields": [{"label": f.label, "tag": f.tag,
+                                    "field_type": f.field_type, "required": f.required,
                                     "options": list(f.options), "already_filled": f.already_filled,
                                     "manual_only": f.manual_only} for f in fields],
                         "controls": [n["label"] for n in navs if n.get("label")][:30],
@@ -636,7 +753,8 @@ def _run_browser(run: AgentRun) -> None:
                     run.handoff_context = {
                         "url": safe_display_url(url), "title": title,
                         "inspected": True, "chrome_focused": chrome_focused,
-                        "fields": [{"label": f.label, "required": f.required,
+                        "fields": [{"label": f.label, "tag": f.tag,
+                                    "field_type": f.field_type, "required": f.required,
                                     "options": list(f.options), "already_filled": f.already_filled,
                                     "manual_only": f.manual_only} for f in fields],
                         "controls": [n["label"] for n in navs if n.get("label")][:30],
@@ -649,20 +767,27 @@ def _run_browser(run: AgentRun) -> None:
                     pass
                 break
 
-            model_fields = [f.for_model() for f in fields if not f.already_filled and not f.manual_only]
-            try:
-                retrieved = retrieve_context(run.documents, run.prompt, model_fields)
-                run.retrieved_sources = [
-                    {"filename": c["filename"], "page": c["page"], "score": c["score"],
-                     "excerpt": c["text"][:220]}
-                    for c in retrieved
-                ]
-                answers = map_prompt_to_fields(run.prompt, model_fields, retrieved)
-            except Exception as exc:
-                raise RuntimeError(f"Field mapping failed: {exc}") from exc
+            model_fields = [metadata for f in fields if is_mappable_field(metadata := f.for_model())]
+            # Legacy literal-only runs stay local; normal assistance maps both sources.
+            explicit_choices = map_explicit_prompt_choices(run.prompt, model_fields)
+            answers = {}
             ungrounded_ids: list[str] = []
-            if run.mode == "sec_pdf_assist":
-                answers, ungrounded_ids = retain_pdf_grounded_answers(answers)
+            if run.mode in {"assist", "sec_pdf_assist"} and model_fields:
+                try:
+                    retrieved = retrieve_context(run.documents, run.prompt, model_fields)
+                    run.retrieved_sources = [
+                        {"filename": c["filename"], "page": c["page"], "score": c["score"],
+                         "excerpt": c["text"][:220]}
+                        for c in retrieved
+                    ]
+                    answers = map_prompt_to_fields(run.prompt, model_fields, retrieved)
+                except Exception as exc:
+                    raise RuntimeError(f"Field mapping failed: {exc}") from exc
+                if run.mode == "sec_pdf_assist":
+                    answers, ungrounded_ids = retain_pdf_grounded_answers(answers)
+            if run.mode != "assist":
+                answers.update(explicit_choices)
+            ungrounded_ids = [field_id for field_id in ungrounded_ids if field_id not in answers]
             values = {field_id: answer["value"] for field_id, answer in answers.items()}
             filled_ids, skipped_ids, verification_failed_ids = fill_values(driver, fields, values)
             skipped_ids = list(dict.fromkeys([*skipped_ids, *ungrounded_ids]))
@@ -705,7 +830,8 @@ def _run_browser(run: AgentRun) -> None:
                         "url": safe_display_url(driver.current_url), "title": title_after,
                         "inspected": True,
                         "chrome_focused": chrome_focused,
-                        "fields": [{"label": f.label, "required": f.required,
+                        "fields": [{"label": f.label, "tag": f.tag,
+                                    "field_type": f.field_type, "required": f.required,
                                     "options": list(f.options), "already_filled": f.already_filled,
                                     "manual_only": f.manual_only} for f in fields_after],
                         "controls": [n["label"] for n in navs_after if n.get("label")][:30],
@@ -751,6 +877,9 @@ def _run_browser(run: AgentRun) -> None:
             run.error = f"{type(exc).__name__}: {safe_error[:500]}"
             run.record("error", run.error)
     finally:
+        if run.stop_event.is_set():
+            with run.lock:
+                run.status = "stopped"
         # Keep Chrome open at review or error so the user can inspect the state.
         if driver and run.status not in {"review_ready", "form_ready", "error"}:
             try:

@@ -35,7 +35,7 @@ def _is_negated(text: str, start: int) -> bool:
 
 
 def _direct_choice_answer(field: dict, prompt: str,
-                          retrieved_context: list[dict]) -> dict | None:
+                          retrieved_context: list[dict], *, exact_only: bool = False) -> dict | None:
     if field.get("tag") not in {"select", "choice_group"}:
         return None
     options = [str(option).strip() for option in field.get("options", []) if str(option).strip()]
@@ -66,7 +66,7 @@ def _direct_choice_answer(field: dict, prompt: str,
                         score = 1
                 best = (_sentence_for_match(source_text, match.start(), match.end()), score)
                 break
-            if best is None:
+            if best is None and not exact_only:
                 source_words = list(re.finditer(r"[a-z0-9]+", source_text, flags=re.I))
                 for size in range(min(6, len(source_words)), 1, -1):
                     for start_index in range(0, len(source_words) - size + 1):
@@ -93,7 +93,9 @@ def _direct_choice_answer(field: dict, prompt: str,
                 unique_options[_norm(option)] = (option, quote, score)
         if not unique_options:
             continue
-        is_checkbox = field.get("tag") == "choice_group" and field.get("type") == "checkbox"
+        is_checkbox = (field.get("tag") == "choice_group" and field.get("type") == "checkbox") or (field.get("tag") == "select" and field.get("multiple"))
+        if not is_checkbox and exact_only and len(unique_options) > 1:
+            return {"ambiguous": True}
         if not is_checkbox:
             highest = max(item[2] for item in unique_options.values())
             unique_options = {key: item for key, item in unique_options.items() if item[2] == highest}
@@ -116,6 +118,46 @@ def _direct_choice_answer(field: dict, prompt: str,
     return None
 
 
+PROTECTED_FIELD = re.compile(
+    r"captcha|password|passphrase|sign.?in|log.?in|verification|one.time|otp|mfa|"
+    r"consent|agree|accept.*terms|terms.*accept|certif|attest|declar|signature|signing|perjury|"
+    r"api[ _-]?key|access[ _-]?token|security code",
+    re.I,
+)
+
+
+def is_mappable_field(field: dict) -> bool:
+    if field.get("already_filled") or field.get("manual_only"):
+        return False
+    if field.get("tag") not in {"input", "textarea", "select", "choice_group"}:
+        return False
+    if field.get("type") in {"password", "file", "hidden", "submit", "button", "reset", "image"}:
+        return False
+    description = " ".join(str(field.get(key, "")) for key in ("label", "placeholder", "field_id"))
+    return not PROTECTED_FIELD.search(description)
+
+
+def map_explicit_prompt_choices(prompt: str, fields: list[dict]) -> dict[str, dict]:
+    """Select literal prompt-named options locally, leaving all text inputs blank.
+
+    This path needs neither a PDF nor model credentials and never infers Yes/No.
+    """
+    answers = {}
+    for field in fields:
+        if not is_mappable_field(field):
+            continue
+        answer = _direct_choice_answer(field, prompt, [], exact_only=True)
+        if not answer or answer.get("ambiguous"):
+            continue
+        answers[str(field["field_id"])] = {
+            "value": answer["value"],
+            "source": {"type": "prompt", "filename": "User prompt", "page": None,
+                       "document_id": None, "quote": answer["source_quote"]},
+            "choice_reason": answer["choice_reason"],
+        }
+    return answers
+
+
 def _config() -> tuple[str, str, str]:
     base = os.getenv("LLM_BASE_URL", os.getenv("NEBIUS_BASE_URL", "https://api.tokenfactory.nebius.com/v1")).strip().rstrip("/")
     model = os.getenv("LLM_MODEL", os.getenv("NEBIUS_MODEL", "")).strip()
@@ -132,12 +174,18 @@ def map_prompt_to_fields(prompt: str, fields: list[dict],
     Every answer must cite an exact quote in either the user's prompt or one of
     the retrieved PDF chunks. The caller independently verifies the quote.
     """
+    fields = [field for field in fields if is_mappable_field(field)]
+    if not fields:
+        return {}
     retrieved_context = retrieved_context or []
     base, model, key = _config()
     system = """You map user-supplied information to web form fields.
 Return one JSON object: {"answers":[{"field_id":"...","value":"... or an array for multi-choice fields","source_quote":"...","choice_reason":"..."}]}.
 Rules:
 - Use only facts from the user's prompt or retrieved PDF passages. Do not use outside knowledge.
+- Follow the user's instructions about what to fill or leave blank. If they ask for navigation only or no filling, omit answers for those fields.
+- The prompt can supply any supported text or choice answer; PDF attachments are optional. Neither source is limited to a particular site.
+- When the prompt explicitly corrects PDF information, use the user's correction. Otherwise omit conflicting or ambiguous answers and leave them for the user.
 - For every answer, source_quote must be an exact contiguous quote from the prompt or one retrieved passage.
 - For ordinary text fields, value must remain an exact substring of source_quote; do not infer, paraphrase, calculate, or reformat it.
 - For select/radio/checkbox fields, value must exactly match one or more listed options. You may map a clearly stated fact to an option such as Yes/No even when the option label itself is not written in the source. The quoted evidence must directly answer the question and unambiguously support the choice. If it does not, omit the field.
@@ -185,12 +233,6 @@ Rules:
         for answer in parsed.get("answers", [])
         if isinstance(answer, dict)
     }
-    for field in fields:
-        direct = _direct_choice_answer(field, prompt, retrieved_context)
-        if direct and direct.get("ambiguous"):
-            parsed_answers.pop(str(field["field_id"]), None)
-        elif direct:
-            parsed_answers[str(field["field_id"])] = direct
 
     for answer in parsed_answers.values():
         field_id = str(answer.get("field_id", ""))

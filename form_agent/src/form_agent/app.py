@@ -2,11 +2,64 @@ from __future__ import annotations
 
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse
+from fastapi.responses import Response
+from pydantic import BaseModel, Field
+from urllib.parse import quote
 
-from form_agent.agent import active_run, resume_run, start_run, stop_run
+from form_agent.agent import active_run, resolve_destination, resume_run, start_run, stop_run
+from form_agent.modes import choose_run_mode
 from form_agent.pdf_rag import add_pdf, list_documents, remove_document
+from form_agent.pdf_forms import add_template, fill_template, get_result, list_templates, remove_template
 
 app = FastAPI(title="Prompt-driven Browser Form Agent", version="0.2.0")
+
+
+class PdfFillRequest(BaseModel):
+    template_id: str = Field(min_length=1, max_length=100)
+    prompt: str = Field(min_length=1, max_length=40000)
+    document_ids: list[str] = Field(default_factory=list, max_length=10)
+
+
+@app.get("/api/pdf/templates")
+def pdf_templates() -> list[dict]:
+    return list_templates()
+
+
+@app.post("/api/pdf/templates", status_code=201)
+async def upload_pdf_template(file: UploadFile = File(...)) -> dict:
+    content = await file.read(15 * 1024 * 1024 + 1)
+    try:
+        return add_template(file.filename or "form.pdf", content)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.delete("/api/pdf/templates/{template_id}")
+def delete_pdf_template(template_id: str) -> dict:
+    if not remove_template(template_id):
+        raise HTTPException(status_code=404, detail="PDF template not found")
+    return {"removed": True}
+
+
+@app.post("/api/pdf/fill")
+def fill_pdf(payload: PdfFillRequest) -> dict:
+    try:
+        return fill_template(payload.template_id, payload.prompt, payload.document_ids)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=f"PDF filling failed: {type(exc).__name__}. Check your model configuration and retry.") from exc
+
+
+@app.get("/api/pdf/results/{result_id}/download")
+def download_pdf(result_id: str) -> Response:
+    result = get_result(result_id)
+    if not result:
+        raise HTTPException(status_code=404, detail="Filled PDF expired or was removed; fill the form again")
+    return Response(content=result["content"], media_type="application/pdf", headers={
+        "Content-Disposition": "attachment; filename*=UTF-8''" + quote(result["filename"]),
+        "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff",
+    })
 
 
 @app.get("/health")
@@ -45,8 +98,13 @@ def delete_document(document_id: str) -> dict:
 async def start(request: Request) -> dict:
     try:
         payload = await request.json()
-        run = start_run(str(payload.get("prompt", "")), payload.get("document_ids") or [],
-                        str(payload.get("mode", "navigate_only")))
+        prompt = str(payload.get("prompt", ""))
+        document_ids = payload.get("document_ids") or []
+        mode = payload.get("mode")
+        if mode is None:
+            destination, _ = resolve_destination(prompt)
+            mode = choose_run_mode(destination, bool(document_ids))
+        run = start_run(prompt, document_ids, str(mode))
         return run.public()
     except (ValueError, RuntimeError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -73,43 +131,47 @@ def dashboard() -> str:
     return DASHBOARD
 
 
-DASHBOARD = """<!doctype html>
+DASHBOARD = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Browser Form Agent</title><style>
-body{font:16px system-ui,Segoe UI,sans-serif;max-width:850px;margin:2rem auto;padding:0 1rem;color:#1b1b1b;background:#f5f7fa}
-main{background:white;border:1px solid #d8dee8;border-radius:12px;padding:1.5rem;box-shadow:0 4px 20px #16304a10}
-label{display:block;font-weight:650;margin:.8rem 0 .3rem}textarea,input{box-sizing:border-box;width:100%;padding:.75rem;border:1px solid #9ca9b8;border-radius:6px;font:inherit}
-textarea{min-height:180px;resize:vertical}
-.row{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}button{border:0;border-radius:6px;padding:.7rem 1rem;font:inherit;font-weight:650;cursor:pointer;background:#174ea6;color:white}button.secondary{background:#4b5563}button:disabled{opacity:.45;cursor:not-allowed}
- .muted{color:#536171;font-size:.92rem}.docrow{display:flex;gap:.5rem;align-items:center;justify-content:space-between;border-bottom:1px solid #e5e7eb;padding:.4rem 0}.docrow button{padding:.3rem .5rem;background:#6b7280}
-.handoff{margin-top:1rem;border:1px solid #d39200;border-radius:8px;padding:1rem;background:#fffaf0;overflow-wrap:anywhere}.handoff[hidden]{display:none}#handoffDetails{white-space:pre-wrap}
-.runpanel{margin-top:1rem;border:1px solid #cbd5e1;border-radius:8px;padding:1rem;background:#f8fafc;overflow-wrap:anywhere}.runpanel h2,.runpanel h3{margin:.25rem 0 .6rem}.runpanel ul,.runpanel ol{padding-left:1.4rem}.runpanel li{margin:.35rem 0}.error{color:#9b1c1c}
+<title>Form Agent</title><style>
+*{box-sizing:border-box}body{font:16px system-ui,Segoe UI,sans-serif;max-width:800px;margin:3rem auto;padding:0 1rem;color:#182333;background:#f7f8fa}
+main{background:#fff;border:1px solid #e0e5eb;border-radius:16px;padding:2rem}h1{font-size:1.45rem;margin:0 0 1.5rem}h2{font-size:1.05rem;margin:0}label{display:block;font-weight:600;margin-bottom:.5rem}
+textarea{width:100%;min-height:150px;resize:vertical;padding:1rem;border:1px solid #bac4d1;border-radius:10px;font:inherit;line-height:1.5}textarea:focus-visible,button:focus-visible,.upload:focus-within{outline:3px solid #b3ceff;outline-offset:3px}
+.attachments{margin:.8rem 0 1.3rem}.upload{display:inline-block;border:1px solid #cbd3de;border-radius:7px;padding:.5rem .8rem;cursor:pointer;font-weight:500}.upload input{position:absolute;width:1px;height:1px;opacity:0}.docrow{display:flex;align-items:center;gap:.5rem;justify-content:space-between;margin:.4rem 0;font-size:.9rem;overflow-wrap:anywhere}.docrow button{padding:.25rem .5rem;background:#edf0f5;color:#334155}
+.download{display:inline-block;margin:0 0 1rem;padding:.75rem 1rem;border-radius:8px;background:#2159c2;color:white;text-decoration:none;font-weight:600}[hidden]{display:none!important}.actions{display:flex;gap:.6rem;flex-wrap:wrap}button{border:0;border-radius:8px;padding:.75rem 1rem;font:inherit;font-weight:600;cursor:pointer;background:#2159c2;color:#fff}button.secondary{background:#edf0f5;color:#334155}button:disabled{opacity:.45;cursor:not-allowed}.muted{color:#667386;font-size:.9rem;line-height:1.5}.error{color:#ae2424}
+#pdfSource,#templateInfo{overflow-wrap:anywhere}#runMessage{margin:1rem 0;overflow-wrap:anywhere}.interventions{border-top:1px solid #e5e9ef;padding-top:1.3rem;margin-top:1.5rem}.questions{list-style:none;padding:0;margin:.8rem 0 0}.question{padding:1rem 0;border-bottom:1px solid #e5e9ef;overflow-wrap:anywhere}.question h3{font-size:1rem;margin:0 0 .5rem;font-weight:600}.question p{margin:.35rem 0;font-size:.9rem;color:#536171}.options{padding-left:1.3rem;margin:.4rem 0;font-size:.95rem}.options li{margin:.25rem 0}
+@media(max-width:520px){body{margin:1rem auto}main{padding:1.2rem}.actions button{width:100%}}
 </style></head><body><main>
-<label for="pdfs">Attach PDF context for retrieval</label><input id="pdfs" type="file" accept="application/pdf,.pdf" multiple><div class="row"><button class="secondary" onclick="uploadPdfs()">Add PDFs</button></div><div id="documents" class="muted">No PDFs attached.</div>
-<label for="prompt">Prompt</label><textarea id="prompt" placeholder="Say which site or form to open and what information to use. Include a website URL/domain, or say “go to [site name]”. Do not include passwords, API keys, OTPs, or other login secrets."></textarea>
-<label for="mode">Run mode</label><select id="mode" style="box-sizing:border-box;width:100%;padding:.75rem;border:1px solid #9ca9b8;border-radius:6px;font:inherit"><option value="navigate_only">Navigate to the form (leave fields unchanged)</option><option value="sec_pdf_assist">SEC form assistance from attached PDF (fills supported fields, never submits)</option></select>
-<p class="muted">PDF text is extracted and searched locally. Only retrieved excerpts for visible fields, your prompt, and field labels/options are sent to your configured Nebius model. Credentials and existing browser field values are not sent to the model. Use only documents you are authorized to process.</p>
-<div class="row"><button id="start" onclick="startRun()">Run in Chrome</button><button class="secondary" id="resume" onclick="resumeRun()" disabled>Resume after my intervention</button><button class="secondary" id="stop" onclick="stopRun()" disabled>Stop and close Chrome</button></div>
-<section class="runpanel" id="runPanel" aria-live="polite"><h2 id="runHeading">Run status</h2><p id="runMessage">Ready. Choose a mode and click Run in Chrome to start visible Chrome.</p><div id="runDetails"></div><h3>Retrieved PDF passages</h3><ul id="sourceEvidence"><li>None retrieved yet.</li></ul><h3>Filled field evidence</h3><ul id="fieldEvidence"><li>No fields filled.</li></ul><h3>Recent events</h3><ol id="runEvents"><li>No run started.</li></ol></section>
-<section class="handoff" id="handoffPanel" role="status" aria-live="polite" hidden><strong id="handoffTitle">User intervention needed</strong><div id="handoffDetails"></div></section>
+<h1>Form Agent</h1>
+<label for="prompt">Prompt</label><textarea id="prompt" oninput="updateButtons()" placeholder="Tell the agent which form to find and what information to use."></textarea>
+<div class="attachments"><label class="upload" for="pdfs">+ Add files<input id="pdfs" type="file" accept="application/pdf,.pdf" multiple onchange="uploadPdfs()"></label><span class="muted"> Reference PDFs</span><div id="documents"></div><label class="upload" for="formPdf">+ Add form PDF<input id="formPdf" type="file" accept="application/pdf,.pdf" onchange="uploadFormPdf()"></label><div id="templateInfo" class="muted"></div><button class="secondary" id="removeTemplate" onclick="clearTemplate()" hidden>Remove form PDF</button></div>
+<div class="actions"><button id="start" onclick="startRun()">Search on Google</button><button class="secondary" id="resume" onclick="resumeRun()" disabled>Resume after intervention</button><button class="secondary" id="stop" onclick="stopRun()" disabled>Close</button></div>
+<p id="runMessage" class="muted" role="status" aria-live="polite">Ready.</p>
+<div id="pdfResult" hidden><a id="downloadPdf" class="download">Download filled PDF</a><p id="pdfSource" class="muted"></p></div>
+<section class="interventions" aria-labelledby="interventionHeading"><h2 id="interventionHeading">Human intervention needed</h2><p id="handoffMessage" class="muted">Questions that need your input will appear here.</p><ul id="questions" class="questions"></ul></section>
 </main><script>
-let timer=null;let docs=[];
-async function request(path,method='GET',body=null){const r=await fetch(path,{method,headers:{'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});const j=await r.json();if(!r.ok)throw new Error(j.detail||'Request failed');if(typeof renderHandoff==='function')renderHandoff(j);return j}
-async function uploadPdfs(){const input=document.getElementById('pdfs');try{for(const f of input.files){const fd=new FormData();fd.append('file',f);const r=await fetch('/api/documents',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.detail||'PDF upload failed');docs.push(j)}input.value='';renderDocs()}catch(e){alert(e.message)}}
-async function removePdf(id){try{await request('/api/documents/'+encodeURIComponent(id),'DELETE');docs=docs.filter(d=>d.document_id!==id);renderDocs()}catch(e){alert(e.message)}}
-function renderDocs(){const box=document.getElementById('documents');if(!docs.length){box.textContent='No PDFs attached.';return}box.replaceChildren(...docs.map(d=>{const row=document.createElement('div');row.className='docrow';const span=document.createElement('span');span.textContent=d.filename+' · '+d.page_count+' pages · '+d.chunk_count+' chunks';const b=document.createElement('button');b.textContent='Remove';b.onclick=()=>removePdf(d.document_id);row.append(span,b);return row}))}
-async function startRun(){try{document.getElementById('start').disabled=true;const s=await request('/api/start','POST',{prompt:document.getElementById('prompt').value,mode:document.getElementById('mode').value,document_ids:docs.map(d=>d.document_id)});render(s);startPolling()}catch(e){showRunError('Could not start run',e.message);document.getElementById('start').disabled=false}}
-async function resumeRun(){try{render(await request('/api/resume','POST'))}catch(e){showRunError('Could not resume run',e.message)}}
-async function stopRun(){try{render(await request('/api/stop','POST'))}catch(e){showRunError('Could not stop run',e.message)}}
-function startPolling(){if(timer)clearInterval(timer);timer=setInterval(poll,1200);poll()}
-async function poll(){try{const s=await request('/api/status');render(s);if(['stopped','finished','error','idle'].includes(s.status)){clearInterval(timer);timer=null;document.getElementById('start').disabled=false}}catch(e){showRunError('Connection to the agent was lost',e.message)}}
-function showRunError(title,message){document.getElementById('runHeading').textContent=title;document.getElementById('runMessage').textContent=message;document.getElementById('runMessage').className='error'}
-function addLines(id,items,empty){const box=document.getElementById(id);box.replaceChildren();if(!items||!items.length){const li=document.createElement('li');li.textContent=empty;box.append(li);return}for(const item of items){const li=document.createElement('li');li.textContent=item;box.append(li)}}
-function render(s){const terminal=['stopped','finished','error','idle'].includes(s.status);document.getElementById('start').disabled=!terminal;document.getElementById('resume').disabled=s.status!=='waiting_user';document.getElementById('stop').disabled=terminal;document.getElementById('runHeading').textContent='Run status: '+(s.status||'unknown');const message=s.error||s.message||'No status message';const msg=document.getElementById('runMessage');msg.textContent=message;msg.className=s.status==='error'?'error':'';const details=[];if(s.destination_url)details.push('Destination: '+s.destination_url);if(s.current_url)details.push('Current page: '+s.current_url);if(s.mode)details.push('Mode: '+s.mode);if(s.fields_seen&&s.fields_seen.length)details.push('Fields detected: '+s.fields_seen.join(' · '));if(s.filled_fields&&s.filled_fields.length)details.push('Fields filled: '+s.filled_fields.join(' · '));if(s.skipped_fields&&s.skipped_fields.length)details.push('Fields skipped: '+s.skipped_fields.join(' · '));if(s.required_missing&&s.required_missing.length)details.push('Required fields still blank: '+s.required_missing.join(' · '));document.getElementById('runDetails').textContent=details.join('\\n');addLines('sourceEvidence',(s.retrieved_sources||[]).map(x=>`${x.filename}, page ${x.page}: ${x.excerpt}`),'No PDF passages retrieved yet.');addLines('fieldEvidence',(s.field_sources||[]).map(x=>`${x.field}: ${x.value} — ${x.filename}${x.page?' p. '+x.page:''}; quote: “${x.quote}”${x.choice_reason?' — '+x.choice_reason:''}`),'No fields filled.');addLines('runEvents',(s.events||[]).slice(-12).map(x=>`${x.time} ${x.event}: ${x.message}`),'No run events reported.')}
-async function loadDocs(){try{docs=await request('/api/documents');renderDocs()}catch(e){showRunError('Could not load attachments',e.message)}}
-async function loadInitialState(){await loadDocs();try{const s=await request('/api/status');render(s);if(!['stopped','finished','error','idle'].includes(s.status))startPolling()}catch(e){showRunError('Cannot reach the agent service',e.message)}}
-let handoffWasActive=false;
-function renderHandoff(s){const panel=document.getElementById('handoffPanel');const box=document.getElementById('handoffDetails');const heading=document.getElementById('handoffTitle');const c=s.handoff_context||{};if(!panel||!box)return;const active=['waiting_user','review_ready','form_ready'].includes(s.status);if(!active){panel.hidden=true;if(handoffWasActive)document.title='Browser Form Agent';handoffWasActive=false;return}panel.hidden=false;heading.textContent=s.status==='form_ready'?'Relevant form reached':s.status==='review_ready'?'Review required':'User intervention needed';const lines=[];if(c.fields&&c.fields.length){for(const f of c.fields){let line='• '+f.label;if(f.required&&!f.already_filled)line+=' [required; blank]';if(f.manual_only)line+=' [select manually]';lines.push(line);if(f.options&&f.options.length)lines.push('  Options: '+f.options.join(' | '))}}else{lines.push('No question or input field was detected on this page.')}box.textContent=lines.join('\\n');document.title=s.status==='form_ready'?'Form reached - Browser Form Agent':'User intervention needed - Browser Form Agent';if(!handoffWasActive)panel.scrollIntoView({behavior:'smooth',block:'center'});handoffWasActive=true}
+let timer=null;let docs=[];let template=null;let uploading=false;let busy=false;let lastState={status:'idle'};
+function webPdfRequest(){const p=document.getElementById('prompt').value||'';return /\bpdf\b/i.test(p)&&(/\b(?:find|search|navigate|browse|visit|go to)\b/i.test(p)||/https?:\/\//i.test(p)||/^\s*(?:download|fetch)\b/i.test(p))}
+const terminal=s=>['stopped','finished','error','idle'].includes(s.status);
+async function request(path,method='GET',body=null){const r=await fetch(path,{method,headers:{'Content-Type':'application/json'},body:body===null?undefined:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.detail||'Request failed');return j}
+function showError(message){const box=document.getElementById('runMessage');box.textContent=message;box.className='error'}
+function updateButtons(){document.getElementById('start').disabled=busy||uploading||!terminal(lastState);document.getElementById('resume').disabled=busy||lastState.status!=='waiting_user';document.getElementById('stop').disabled=busy||terminal(lastState)||lastState.status==='stopping';document.getElementById('pdfs').disabled=uploading||busy||!terminal(lastState);document.getElementById('formPdf').disabled=uploading||busy||!terminal(lastState);document.getElementById('removeTemplate').disabled=busy||uploading||!terminal(lastState);document.getElementById('start').textContent=template&&!webPdfRequest()?'Fill PDF':'Search on Google'}
+async function uploadPdfs(){const input=document.getElementById('pdfs');uploading=true;updateButtons();try{for(const f of input.files){const fd=new FormData();fd.append('file',f);const r=await fetch('/api/documents',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.detail||'PDF upload failed');docs.push(j);renderDocs()}document.getElementById('runMessage').textContent='Files added.'}catch(e){showError(e.message)}finally{input.value='';uploading=false;updateButtons()}}
+async function removePdf(id){busy=true;updateButtons();try{await request('/api/documents/'+encodeURIComponent(id),'DELETE');docs=docs.filter(d=>d.document_id!==id);renderDocs()}catch(e){showError(e.message)}finally{busy=false;updateButtons()}}
+function renderDocs(){const box=document.getElementById('documents');box.replaceChildren(...docs.map(d=>{const row=document.createElement('div');row.className='docrow';const span=document.createElement('span');span.textContent=d.filename;const b=document.createElement('button');b.textContent='Remove';b.setAttribute('aria-label','Remove '+d.filename);b.disabled=busy||!terminal(lastState);b.onclick=()=>removePdf(d.document_id);row.append(span,b);return row}))}
+async function action(path,body=null){busy=true;updateButtons();try{render(await request(path,'POST',body));startPolling()}catch(e){showError(e.message)}finally{busy=false;updateButtons();renderDocs()}}
+function startRun(){if(!document.getElementById('prompt').value.trim()){showError('Enter a prompt first.');document.getElementById('prompt').focus();return}if(template&&!webPdfRequest())return fillPdf();document.getElementById('pdfResult').hidden=true;return action('/api/start',{prompt:document.getElementById('prompt').value,document_ids:docs.map(d=>d.document_id)})}
+function resumeRun(){return action('/api/resume')}
+function stopRun(){return action('/api/stop')}
+function startPolling(){if(timer)clearInterval(timer);timer=setInterval(poll,1200)}
+async function poll(){try{render(await request('/api/status'));if(terminal(lastState)){clearInterval(timer);timer=null}}catch(e){showError('Cannot reach the agent: '+e.message)}}
+function render(s){lastState=s;updateButtons();renderDocs();const box=document.getElementById('runMessage');box.textContent=s.error||s.message||'Ready.';box.className=s.status==='error'?'error':'muted';renderHandoff(s);if(s.pdf_result)renderPdfResult(s.pdf_result,s.pdf_source_url);else document.getElementById('pdfResult').hidden=true}
+function renderHandoff(s){const active=['waiting_user','review_ready','form_ready'].includes(s.status);const box=document.getElementById('questions');const note=document.getElementById('handoffMessage');box.replaceChildren();document.title=active?'Intervention needed — Form Agent':'Form Agent';if(!active){document.getElementById('interventionHeading').textContent='Human intervention needed';note.textContent=terminal(s)?'Questions that need your input will appear here.':'No intervention needed right now.';return}const reason=s.handoff_reason||'';const heading=document.getElementById('interventionHeading');heading.textContent=s.status==='review_ready'?'Ready for your review':'Human intervention needed';note.textContent=s.message||'Complete the requested step in Chrome, then resume here.';const showFields=s.status==='form_ready'||['missing_required_fields','write_verification'].includes(reason);const fields=showFields?((s.handoff_context||{}).fields||[]).filter(f=>!f.already_filled&&(reason!=='missing_required_fields'||f.required||f.manual_only)):[];if(!fields.length)return;for(const [index,f] of fields.entries()){const item=document.createElement('li');item.className='question';const title=document.createElement('h3');title.textContent=(index+1)+'. '+f.label;const input=document.createElement('p');input.textContent='Input field: '+(f.tag==='textarea'?'Long text':f.field_type||f.tag||'Text')+(f.required?' · Required':' · Optional')+(f.manual_only?' · Complete manually':'');item.append(title,input);if(f.options&&f.options.length){const label=document.createElement('p');label.textContent='Options';const options=document.createElement('ul');options.className='options';for(const value of f.options){const option=document.createElement('li');option.textContent=value;options.append(option)}item.append(label,options)}box.append(item)}}
+function renderTemplate(){document.getElementById('templateInfo').textContent=template?template.filename+' · '+template.page_count+' pages · '+template.field_count+' fields detected':'';document.getElementById('removeTemplate').hidden=!template;updateButtons()}
+async function uploadFormPdf(){const input=document.getElementById('formPdf');if(!input.files.length)return;uploading=true;updateButtons();try{const fd=new FormData();fd.append('file',input.files[0]);const response=await fetch('/api/pdf/templates',{method:'POST',body:fd});const result=await response.json();if(!response.ok)throw new Error(result.detail||'Could not inspect PDF');const previous=template;template=result;renderTemplate();document.getElementById('pdfResult').hidden=true;document.getElementById('runMessage').textContent='Form PDF ready. Enter your instructions and click Fill PDF.';if(previous)await request('/api/pdf/templates/'+encodeURIComponent(previous.template_id),'DELETE')}catch(e){showError(e.message)}finally{input.value='';uploading=false;updateButtons()}}
+async function clearTemplate(){if(!template)return;busy=true;updateButtons();try{await request('/api/pdf/templates/'+encodeURIComponent(template.template_id),'DELETE');template=null;renderTemplate()}catch(e){showError(e.message)}finally{busy=false;updateButtons()}}
+function renderPdfResult(result,source=''){const link=document.getElementById('downloadPdf');link.href=result.download_url;link.download=result.filename;document.getElementById('pdfResult').hidden=false;document.getElementById('runMessage').textContent=result.filled_count+' fields filled. '+result.remaining_fields.length+' left for you. The PDF stays editable.';document.getElementById('interventionHeading').textContent='Details left for you';document.getElementById('handoffMessage').textContent=(result.warnings||[]).join(' ')||'Download the PDF to review the filled values and complete the remaining fields.';const questions=document.getElementById('questions');for(const f of result.remaining_fields){const li=document.createElement('li');li.className='question';li.textContent=f.label+' · Page '+f.page;const skipped=(result.skipped_fields||[]).find(x=>x.field===f.label);if(skipped){const reason=document.createElement('p');reason.textContent=skipped.reason;li.append(reason)}questions.append(li)};document.getElementById('pdfSource').textContent=source?'Source: '+source:''}
+async function fillPdf(){busy=true;updateButtons();document.getElementById('pdfResult').hidden=true;document.getElementById('questions').replaceChildren();document.getElementById('runMessage').className='muted';document.getElementById('runMessage').textContent='Reading the form and matching your prompt and reference PDFs…';try{const result=await request('/api/pdf/fill','POST',{template_id:template.template_id,prompt:document.getElementById('prompt').value,document_ids:docs.map(d=>d.document_id)});renderPdfResult(result)}catch(e){showError(e.message)}finally{busy=false;updateButtons()}}
+async function loadInitialState(){busy=true;updateButtons();try{docs=await request('/api/documents');const templates=await request('/api/pdf/templates');template=templates.length?templates[templates.length-1]:null;renderTemplate();render(await request('/api/status'));if(!terminal(lastState))startPolling()}catch(e){showError(e.message)}finally{busy=false;updateButtons();renderDocs()}}
 loadInitialState();
 </script></body></html>"""
-

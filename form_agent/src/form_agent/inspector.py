@@ -345,7 +345,16 @@ def gate_reason(fields: list[FormField], navs: list[dict], title: str, body_text
     text = f"{title} {body_text} " + " ".join(n["label"] for n in navs)
     if HUMAN_GATES["captcha"].search(text):
         return "captcha"
-    if password_present or re.search(r"\b(sign in|log in|create an account)\b", title, re.I):
+    auth_action = re.compile(
+        r"\b(sign[ -]?in|log[ -]?in|sign[ -]?up|register|create (?:an? )?account|"
+        r"reset (?:your )?password|change (?:your )?password)\b", re.I,
+    )
+    # A mixed form can include an optional password without being a login flow.
+    # Password inputs themselves remain excluded from inspection and autofill.
+    identity_label = re.compile(r"^(?:user(?:name)?|user name|e-?mail(?: address)?|phone(?: number)?|remember me)$", re.I)
+    only_identity_fields = all(identity_label.fullmatch(f.label.strip()) for f in fields)
+    auth_context = auth_action.search(title) or ((password_present or (bool(fields) and only_identity_fields)) and any(auth_action.search(n["label"]) for n in navs))
+    if auth_context or (password_present and only_identity_fields):
         return "authentication"
     if HUMAN_GATES["consent"].search(text):
         return "consent"
@@ -366,10 +375,10 @@ def find_forward_action(navs: list[dict]) -> dict | None:
     return None
 
 
-def is_review_page(navs: list[dict], title: str, body_text: str) -> bool:
+def is_review_page(navs: list[dict], title: str, body_text: str, *, allow_final_action: bool = True) -> bool:
     if re.search(r"\breview (your|the|submission|answers|information)\b", f"{title} {body_text[:500]}", re.I):
         return True
-    return any(FINAL_ACTION.fullmatch(n["label"].strip()) for n in navs)
+    return allow_final_action and any(FINAL_ACTION.fullmatch(n["label"].strip()) for n in navs)
 
 
 def read_field_value(driver, field: FormField) -> str | list[str]:
