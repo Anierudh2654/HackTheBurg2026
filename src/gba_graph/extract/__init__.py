@@ -1,0 +1,1 @@
+"""Asynchronous fact extraction pipeline."""

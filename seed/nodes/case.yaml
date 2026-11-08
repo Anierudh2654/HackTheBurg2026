@@ -1,0 +1,30 @@
+- node_id: Case:in-re-mfw-shareholders-litigation-2014
+  node_type: Case
+  label: In re MFW Shareholders Litigation
+  props:
+    case_name: In re MFW Shareholders Litigation
+    decided_on: '2014-06-24'
+    court_id: Court:delaware-supreme-court
+    citation_string: 67 A.3d 496
+  scope_frame: null
+  valid_from: '2014-06-24'
+  valid_to: null
+  known_from: '2014-06-24'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Case:in-re-match-group-2024
+  node_type: Case
+  label: In re Match Group, Inc. Derivative Litigation
+  props:
+    case_name: In re Match Group, Inc. Derivative Litigation
+    decided_on: '2024-04-04'
+    court_id: Court:delaware-supreme-court
+    citation_string: 315 A.3d 446
+  scope_frame: null
+  valid_from: '2024-04-04'
+  valid_to: null
+  known_from: '2024-04-04'
+  source_ids: []
+  origin: seed
+  audited: false

@@ -1,0 +1,1958 @@
+{
+  "nodes": [
+    {
+      "node_id": "Provision:de.dgcl.144b@2025-03-25",
+      "node_type": "Provision",
+      "label": "DGCL § 144(b), post-amendment",
+      "props": {
+        "code": "DGCL",
+        "section": "144(b)",
+        "version_label": "effective 2025-03-25",
+        "safe_harbor_when": {
+          "any": [
+            {
+              "all": [
+                {
+                  "fact": "committee_all_disinterested",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_power_to_say_no",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_power_to_negotiate",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_approval_obtained",
+                  "eq": true
+                }
+              ]
+            },
+            {
+              "any": [
+                {
+                  "fact": "disinterested_stockholder_approval_obtained",
+                  "eq": true
+                },
+                {
+                  "fact": "mom_approval_obtained",
+                  "eq": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "scope_frame": {
+        "addressee_classes": [
+          "controller"
+        ],
+        "transaction_types": [
+          "other_controller_deal"
+        ],
+        "applies_when": null,
+        "exceptions": [],
+        "non_application": {
+          "fact": "litigation_commenced_on",
+          "lte": "2025-02-17"
+        },
+        "defined_terms": {},
+        "jurisdiction": "US-DE",
+        "valid_from": "2025-03-25",
+        "valid_to": null,
+        "source_spans": [],
+        "audited": false
+      },
+      "valid_from": "2025-03-25",
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Provision:de.dgcl.144c@2025-03-25",
+      "node_type": "Provision",
+      "label": "DGCL § 144(c), post-amendment",
+      "props": {
+        "code": "DGCL",
+        "section": "144(c)",
+        "version_label": "effective 2025-03-25",
+        "safe_harbor_when": {
+          "all": [
+            {
+              "all": [
+                {
+                  "fact": "committee_all_disinterested",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_power_to_say_no",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_power_to_negotiate",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_approval_obtained",
+                  "eq": true
+                }
+              ]
+            },
+            {
+              "any": [
+                {
+                  "fact": "disinterested_stockholder_approval_obtained",
+                  "eq": true
+                },
+                {
+                  "fact": "mom_approval_obtained",
+                  "eq": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "scope_frame": {
+        "addressee_classes": [
+          "controller"
+        ],
+        "transaction_types": [
+          "going_private"
+        ],
+        "applies_when": null,
+        "exceptions": [],
+        "non_application": {
+          "fact": "litigation_commenced_on",
+          "lte": "2025-02-17"
+        },
+        "defined_terms": {},
+        "jurisdiction": "US-DE",
+        "valid_from": "2025-03-25",
+        "valid_to": null,
+        "source_spans": [],
+        "audited": false
+      },
+      "valid_from": "2025-03-25",
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Provision:de.dgcl.144@2024-12-01",
+      "node_type": "Provision",
+      "label": "DGCL § 144, pre-amendment (illustrative)",
+      "props": {
+        "code": "DGCL",
+        "section": "144",
+        "version_label": "pre-amendment"
+      },
+      "scope_frame": {
+        "addressee_classes": [
+          "interested_director"
+        ],
+        "transaction_types": [
+          "interested_director"
+        ],
+        "applies_when": null,
+        "exceptions": [],
+        "non_application": null,
+        "defined_terms": {},
+        "jurisdiction": "US-DE",
+        "valid_from": "1967-03-01",
+        "valid_to": null,
+        "source_spans": [],
+        "audited": false
+      },
+      "valid_from": "1967-03-01",
+      "valid_to": "2025-03-25",
+      "known_from": "2024-12-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Case:in-re-mfw-shareholders-litigation-2014",
+      "node_type": "Case",
+      "label": "In re MFW Shareholders Litigation",
+      "props": {
+        "case_name": "In re MFW Shareholders Litigation",
+        "decided_on": "2014-06-24",
+        "court_id": "Court:delaware-supreme-court",
+        "citation_string": "67 A.3d 496"
+      },
+      "scope_frame": null,
+      "valid_from": "2014-06-24",
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Case:in-re-match-group-2024",
+      "node_type": "Case",
+      "label": "In re Match Group, Inc. Derivative Litigation",
+      "props": {
+        "case_name": "In re Match Group, Inc. Derivative Litigation",
+        "decided_on": "2024-04-04",
+        "court_id": "Court:delaware-supreme-court",
+        "citation_string": "315 A.3d 446"
+      },
+      "scope_frame": null,
+      "valid_from": "2024-04-04",
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Holding:mfw-2014",
+      "node_type": "Holding",
+      "label": "MFW dual-protection framework (illustrative)",
+      "props": {
+        "case_node_id": "Case:in-re-mfw-shareholders-litigation-2014",
+        "proposition": "Business-judgment review when both protections are in place from the outset.",
+        "bjr_when": {
+          "all": [
+            {
+              "all": [
+                {
+                  "all": [
+                    {
+                      "fact": "committee_all_disinterested",
+                      "eq": true
+                    },
+                    {
+                      "fact": "committee_power_to_say_no",
+                      "eq": true
+                    },
+                    {
+                      "fact": "committee_power_to_negotiate",
+                      "eq": true
+                    },
+                    {
+                      "fact": "committee_approval_obtained",
+                      "eq": true
+                    }
+                  ]
+                },
+                {
+                  "fact": "committee_formed_before_substantive_negotiation",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_free_to_select_advisors",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_duty_of_care_met",
+                  "eq": true
+                }
+              ]
+            },
+            {
+              "fact": "mom_condition_in_agreement",
+              "eq": true
+            },
+            {
+              "fact": "mom_vote_informed",
+              "eq": true
+            },
+            {
+              "fact": "mom_vote_uncoerced",
+              "eq": true
+            },
+            {
+              "fact": "mom_approval_obtained",
+              "eq": true
+            }
+          ]
+        }
+      },
+      "scope_frame": {
+        "addressee_classes": [
+          "controller"
+        ],
+        "transaction_types": [
+          "going_private",
+          "other_controller_deal"
+        ],
+        "applies_when": null,
+        "exceptions": [],
+        "non_application": null,
+        "defined_terms": {},
+        "jurisdiction": "US-DE",
+        "valid_from": "2014-06-24",
+        "valid_to": null,
+        "source_spans": [],
+        "audited": false
+      },
+      "valid_from": "2014-06-24",
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Holding:match-group-2024",
+      "node_type": "Holding",
+      "label": "Match Group dual protections (illustrative)",
+      "props": {
+        "case_node_id": "Case:in-re-match-group-2024",
+        "proposition": "Both protections must be effective for business-judgment review under the holding.",
+        "bjr_when": {
+          "all": [
+            {
+              "all": [
+                {
+                  "all": [
+                    {
+                      "fact": "committee_all_disinterested",
+                      "eq": true
+                    },
+                    {
+                      "fact": "committee_power_to_say_no",
+                      "eq": true
+                    },
+                    {
+                      "fact": "committee_power_to_negotiate",
+                      "eq": true
+                    },
+                    {
+                      "fact": "committee_approval_obtained",
+                      "eq": true
+                    }
+                  ]
+                },
+                {
+                  "fact": "committee_formed_before_substantive_negotiation",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_free_to_select_advisors",
+                  "eq": true
+                },
+                {
+                  "fact": "committee_duty_of_care_met",
+                  "eq": true
+                }
+              ]
+            },
+            {
+              "fact": "mom_condition_in_agreement",
+              "eq": true
+            },
+            {
+              "fact": "mom_vote_informed",
+              "eq": true
+            },
+            {
+              "fact": "mom_vote_uncoerced",
+              "eq": true
+            },
+            {
+              "fact": "mom_approval_obtained",
+              "eq": true
+            }
+          ]
+        }
+      },
+      "scope_frame": {
+        "addressee_classes": [
+          "controller"
+        ],
+        "transaction_types": [
+          "going_private",
+          "other_controller_deal"
+        ],
+        "applies_when": null,
+        "exceptions": [],
+        "non_application": null,
+        "defined_terms": {},
+        "jurisdiction": "US-DE",
+        "valid_from": "2024-04-04",
+        "valid_to": null,
+        "source_spans": [],
+        "audited": false
+      },
+      "valid_from": "2024-04-04",
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-approval",
+      "node_type": "Element",
+      "label": "Committee approval",
+      "props": {
+        "fact_keys": [
+          "committee_approval_obtained"
+        ],
+        "met_when": {
+          "fact": "committee_approval_obtained",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_approval_obtained",
+      "node_type": "ProcessFact",
+      "label": "committee_approval_obtained",
+      "props": {
+        "fact_key": "committee_approval_obtained"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:mom-approval",
+      "node_type": "Element",
+      "label": "Majority-of-the-minority approval",
+      "props": {
+        "fact_keys": [
+          "mom_approval_obtained"
+        ],
+        "met_when": {
+          "fact": "mom_approval_obtained",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:mom_approval_obtained",
+      "node_type": "ProcessFact",
+      "label": "mom_approval_obtained",
+      "props": {
+        "fact_key": "mom_approval_obtained"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-independence",
+      "node_type": "Element",
+      "label": "Committee independence",
+      "props": {
+        "fact_keys": [
+          "committee_all_disinterested"
+        ],
+        "met_when": {
+          "fact": "committee_all_disinterested",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_all_disinterested",
+      "node_type": "ProcessFact",
+      "label": "committee_all_disinterested",
+      "props": {
+        "fact_key": "committee_all_disinterested"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-power-to-say-no",
+      "node_type": "Element",
+      "label": "Committee power to say no",
+      "props": {
+        "fact_keys": [
+          "committee_power_to_say_no"
+        ],
+        "met_when": {
+          "fact": "committee_power_to_say_no",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_power_to_say_no",
+      "node_type": "ProcessFact",
+      "label": "committee_power_to_say_no",
+      "props": {
+        "fact_key": "committee_power_to_say_no"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-power-to-negotiate",
+      "node_type": "Element",
+      "label": "Committee power to negotiate",
+      "props": {
+        "fact_keys": [
+          "committee_power_to_negotiate"
+        ],
+        "met_when": {
+          "fact": "committee_power_to_negotiate",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_power_to_negotiate",
+      "node_type": "ProcessFact",
+      "label": "committee_power_to_negotiate",
+      "props": {
+        "fact_key": "committee_power_to_negotiate"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-free-to-select-advisors",
+      "node_type": "Element",
+      "label": "Committee free to select advisors",
+      "props": {
+        "fact_keys": [
+          "committee_free_to_select_advisors"
+        ],
+        "met_when": {
+          "fact": "committee_free_to_select_advisors",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_free_to_select_advisors",
+      "node_type": "ProcessFact",
+      "label": "committee_free_to_select_advisors",
+      "props": {
+        "fact_key": "committee_free_to_select_advisors"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-duty-of-care",
+      "node_type": "Element",
+      "label": "Committee duty of care",
+      "props": {
+        "fact_keys": [
+          "committee_duty_of_care_met"
+        ],
+        "met_when": {
+          "fact": "committee_duty_of_care_met",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_duty_of_care_met",
+      "node_type": "ProcessFact",
+      "label": "committee_duty_of_care_met",
+      "props": {
+        "fact_key": "committee_duty_of_care_met"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:committee-ab-initio",
+      "node_type": "Element",
+      "label": "Committee formed before substantive negotiation",
+      "props": {
+        "fact_keys": [
+          "committee_formed_before_substantive_negotiation"
+        ],
+        "met_when": {
+          "fact": "committee_formed_before_substantive_negotiation",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:committee_formed_before_substantive_negotiation",
+      "node_type": "ProcessFact",
+      "label": "committee_formed_before_substantive_negotiation",
+      "props": {
+        "fact_key": "committee_formed_before_substantive_negotiation"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:mom-informed",
+      "node_type": "Element",
+      "label": "Informed stockholder vote",
+      "props": {
+        "fact_keys": [
+          "mom_vote_informed"
+        ],
+        "met_when": {
+          "fact": "mom_vote_informed",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:mom_vote_informed",
+      "node_type": "ProcessFact",
+      "label": "mom_vote_informed",
+      "props": {
+        "fact_key": "mom_vote_informed"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:mom-uncoerced",
+      "node_type": "Element",
+      "label": "Uncoerced stockholder vote",
+      "props": {
+        "fact_keys": [
+          "mom_vote_uncoerced"
+        ],
+        "met_when": {
+          "fact": "mom_vote_uncoerced",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:mom_vote_uncoerced",
+      "node_type": "ProcessFact",
+      "label": "mom_vote_uncoerced",
+      "props": {
+        "fact_key": "mom_vote_uncoerced"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Element:disinterested-stockholder-approval",
+      "node_type": "Element",
+      "label": "Disinterested stockholder approval",
+      "props": {
+        "fact_keys": [
+          "disinterested_stockholder_approval_obtained"
+        ],
+        "met_when": {
+          "fact": "disinterested_stockholder_approval_obtained",
+          "eq": true
+        }
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "ProcessFact:disinterested_stockholder_approval_obtained",
+      "node_type": "ProcessFact",
+      "label": "disinterested_stockholder_approval_obtained",
+      "props": {
+        "fact_key": "disinterested_stockholder_approval_obtained"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Standard:business-judgment",
+      "node_type": "Standard",
+      "label": "Business judgment",
+      "props": {
+        "value": "business_judgment"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "1900-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Standard:entire-fairness",
+      "node_type": "Standard",
+      "label": "Entire fairness",
+      "props": {
+        "value": "entire_fairness"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "1900-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Court:delaware-supreme-court",
+      "node_type": "Court",
+      "label": "Supreme Court of Delaware",
+      "props": {
+        "jurisdiction": "US-DE"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "1776-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Court:delaware-court-of-chancery",
+      "node_type": "Court",
+      "label": "Delaware Court of Chancery",
+      "props": {
+        "jurisdiction": "US-DE"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "1776-01-01",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Source:sec_edgar",
+      "node_type": "Source",
+      "label": "SEC EDGAR",
+      "props": {
+        "registry_entry_id": "sec_edgar"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Source:de_code_online",
+      "node_type": "Source",
+      "label": "Delaware Code Online",
+      "props": {
+        "registry_entry_id": "de_code_online"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Source:de_legislature",
+      "node_type": "Source",
+      "label": "Delaware General Assembly",
+      "props": {
+        "registry_entry_id": "de_legislature"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Source:de_courts",
+      "node_type": "Source",
+      "label": "Delaware Courts",
+      "props": {
+        "registry_entry_id": "de_courts"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "node_id": "Source:courtlistener",
+      "node_type": "Source",
+      "label": "CourtListener",
+      "props": {
+        "registry_entry_id": "courtlistener"
+      },
+      "scope_frame": null,
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_ids": [],
+      "origin": "seed",
+      "audited": false
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "edge_2b3f42acd8f1d160",
+      "src": "Provision:de.dgcl.144@2024-12-01",
+      "dst": "Provision:de.dgcl.144b@2025-03-25",
+      "edge_type": "next_version",
+      "condition": null,
+      "props": {},
+      "valid_from": "2025-03-25",
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_afa5c4fa5b04cc6b",
+      "src": "Provision:de.dgcl.144@2024-12-01",
+      "dst": "Provision:de.dgcl.144c@2025-03-25",
+      "edge_type": "next_version",
+      "condition": null,
+      "props": {},
+      "valid_from": "2025-03-25",
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_68f9144343110f95",
+      "src": "Case:in-re-mfw-shareholders-litigation-2014",
+      "dst": "Court:delaware-supreme-court",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_088ff2680bbef191",
+      "src": "Case:in-re-match-group-2024",
+      "dst": "Court:delaware-supreme-court",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_6c7c24939dfeffe2",
+      "src": "Holding:mfw-2014",
+      "dst": "Case:in-re-mfw-shareholders-litigation-2014",
+      "edge_type": "interprets",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_38d2c7059ee9f2a9",
+      "src": "Holding:match-group-2024",
+      "dst": "Case:in-re-match-group-2024",
+      "edge_type": "interprets",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_94623511e68d5ae7",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Holding:match-group-2024",
+      "edge_type": "superseded_by_statute",
+      "condition": {
+        "not": {
+          "fact": "litigation_commenced_on",
+          "lte": "2025-02-17"
+        }
+      },
+      "props": {},
+      "valid_from": "2025-03-25",
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_537ebc9d95056fc8",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Holding:match-group-2024",
+      "edge_type": "superseded_by_statute",
+      "condition": {
+        "not": {
+          "fact": "litigation_commenced_on",
+          "lte": "2025-02-17"
+        }
+      },
+      "props": {},
+      "valid_from": "2025-03-25",
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_a90473adb8a74b11",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_35d99c85d9540616",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:mom-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_7e8c0d48465d7d2a",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-independence",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_e4cd8924d51c5fff",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-power-to-say-no",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_50180d7adb01b3b2",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-power-to-negotiate",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_0ef9338aa72dfd08",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-free-to-select-advisors",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_1d25148e999f9b72",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-duty-of-care",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_857edab6521952ea",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:committee-ab-initio",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_65b291c9a95019ec",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:mom-informed",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_1dffe6fc32cecad2",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:mom-uncoerced",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_514890b160f2e53b",
+      "src": "Provision:de.dgcl.144b@2025-03-25",
+      "dst": "Element:disinterested-stockholder-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_1206abfab90407e8",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_45b81f6358ae42b9",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:mom-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_94fe75b8e5cd506c",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-independence",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_683bbddab019a070",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-power-to-say-no",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_553ea1a252ae762b",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-power-to-negotiate",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_273a18cf39dbad25",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-free-to-select-advisors",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_f5eb37aa646f9689",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-duty-of-care",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_56f77903afcdcd55",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:committee-ab-initio",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_47247398313d1159",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:mom-informed",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_29e960373605acf0",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:mom-uncoerced",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_3db7d34b3c43780e",
+      "src": "Provision:de.dgcl.144c@2025-03-25",
+      "dst": "Element:disinterested-stockholder-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2025-03-25",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_7439836bdf652b88",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_ba07cb58740e849c",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:mom-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_ed427386ef124d96",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-independence",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_984da4ebeb35ff97",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-power-to-say-no",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_2de830587bcc898e",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-power-to-negotiate",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_93c912e0fc3fb296",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-free-to-select-advisors",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_1788803f71d9bcbf",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-duty-of-care",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_883a1616197d1f4a",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:committee-ab-initio",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_ffffb5c4eef5e024",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:mom-informed",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_6ec1c41c80c0103c",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:mom-uncoerced",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_60b71387bd596ab6",
+      "src": "Holding:mfw-2014",
+      "dst": "Element:disinterested-stockholder-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-06-24",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_b8bf0b9dc90cc0a2",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_974f403104f6a335",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:mom-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_4a7b066acb07601b",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-independence",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_be77909ec603cf25",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-power-to-say-no",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_df1cd38e2fc470ca",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-power-to-negotiate",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_2afc1ab526aefd77",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-free-to-select-advisors",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_1621281266dc0890",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-duty-of-care",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_ff8df7ce64f424af",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:committee-ab-initio",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_5aeea42db6e980b7",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:mom-informed",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_42e388be1c0da129",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:mom-uncoerced",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_fc99a9c90d65884c",
+      "src": "Holding:match-group-2024",
+      "dst": "Element:disinterested-stockholder-approval",
+      "edge_type": "addresses",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2024-04-04",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_51fcfe6b54762595",
+      "src": "ProcessFact:committee_approval_obtained",
+      "dst": "Element:committee-approval",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_639891947617c765",
+      "src": "ProcessFact:mom_approval_obtained",
+      "dst": "Element:mom-approval",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_8e6182420d094b04",
+      "src": "ProcessFact:committee_all_disinterested",
+      "dst": "Element:committee-independence",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_f4b859799003de51",
+      "src": "ProcessFact:committee_power_to_say_no",
+      "dst": "Element:committee-power-to-say-no",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_5ea61aae09bbddbb",
+      "src": "ProcessFact:committee_power_to_negotiate",
+      "dst": "Element:committee-power-to-negotiate",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_22b8aca7a94f6239",
+      "src": "ProcessFact:committee_free_to_select_advisors",
+      "dst": "Element:committee-free-to-select-advisors",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_c94dc383288b86ff",
+      "src": "ProcessFact:committee_duty_of_care_met",
+      "dst": "Element:committee-duty-of-care",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_49063bd269a93f96",
+      "src": "ProcessFact:committee_formed_before_substantive_negotiation",
+      "dst": "Element:committee-ab-initio",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_8e9f4ddc304711f3",
+      "src": "ProcessFact:mom_vote_informed",
+      "dst": "Element:mom-informed",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_93ce07c4b0a67195",
+      "src": "ProcessFact:mom_vote_uncoerced",
+      "dst": "Element:mom-uncoerced",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_e36d027a7f4a409e",
+      "src": "ProcessFact:disinterested_stockholder_approval_obtained",
+      "dst": "Element:disinterested-stockholder-approval",
+      "edge_type": "satisfies",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2014-01-01",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_d046d4527a90de2c",
+      "src": "Court:delaware-supreme-court",
+      "dst": "Source:sec_edgar",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_0366f5116b014ae6",
+      "src": "Court:delaware-supreme-court",
+      "dst": "Source:de_code_online",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_c8213fe70318c42c",
+      "src": "Court:delaware-supreme-court",
+      "dst": "Source:de_legislature",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_9004ac1c7f7f9526",
+      "src": "Court:delaware-supreme-court",
+      "dst": "Source:de_courts",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    },
+    {
+      "edge_id": "edge_5cc183d9930dc03e",
+      "src": "Court:delaware-supreme-court",
+      "dst": "Source:courtlistener",
+      "edge_type": "published_by",
+      "condition": null,
+      "props": {},
+      "valid_from": null,
+      "valid_to": null,
+      "known_from": "2026-11-07",
+      "source_span": null,
+      "confidence": null,
+      "origin": "seed",
+      "audited": false
+    }
+  ]
+}

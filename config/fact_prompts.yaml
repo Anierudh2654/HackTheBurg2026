@@ -1,0 +1,25 @@
+version: 1
+facts:
+  transaction_type: {description: Deal category, value_type: enum, allowed_values: [going_private, other_controller_deal, third_party_sale, interested_director, other], search_terms: [controller, going-private, merger, transaction], time_varying: false}
+  controller_present: {description: Whether a controlling stockholder or control group exists, value_type: bool, search_terms: [controller, controlling stockholder, control group], time_varying: false}
+  controller_identity: {description: Name of the controller, value_type: string, search_terms: [controller, stockholder], time_varying: false}
+  signing_date: {description: Merger agreement signing date, value_type: date, search_terms: [dated, entered into, agreement], time_varying: false}
+  announcement_date: {description: Public announcement date, value_type: date, search_terms: [announced, press release], time_varying: false}
+  closing_date: {description: Closing date, value_type: date, search_terms: [closed, closing, consummated], time_varying: true}
+  litigation_commenced_on: {description: Date a stockholder action about the deal was filed; only known-null if expressly stated no action was filed, value_type: date, search_terms: [complaint, action filed, litigation], time_varying: true}
+  interested_director_involved: {description: Whether an interested director transaction element is present, value_type: bool, search_terms: [interested director, conflict], time_varying: false}
+  special_committee_formed: {description: Whether a special committee was formed, value_type: bool, search_terms: [special committee, committee], time_varying: false}
+  committee_all_disinterested: {description: Whether all committee members are independent and disinterested, value_type: bool, search_terms: [independent, disinterested, committee], time_varying: false}
+  committee_power_to_say_no: {description: Whether the committee had authority to reject the transaction, value_type: bool, search_terms: [reject, say no, authority], time_varying: false}
+  committee_power_to_negotiate: {description: Whether the committee had authority to negotiate, value_type: bool, search_terms: [negotiate, authority], time_varying: false}
+  committee_free_to_select_advisors: {description: Whether the committee could select its own advisors, value_type: bool, search_terms: [advisor, counsel, committee], time_varying: false}
+  committee_duty_of_care_met: {description: Whether the committee satisfied its duty of care, value_type: bool, search_terms: [duty of care, committee], time_varying: false}
+  committee_formed_before_substantive_negotiation: {description: Whether the committee was formed before substantive negotiation, value_type: bool, search_terms: [before negotiations, ab initio, committee formed], time_varying: false}
+  committee_approval_obtained: {description: Whether the committee approved the transaction, value_type: bool, search_terms: [committee approved, approval], time_varying: false}
+  mom_condition_in_agreement: {description: Whether a majority-of-the-minority condition is in the agreement, value_type: bool, search_terms: [majority of the minority, minority condition], time_varying: false}
+  mom_vote_informed: {description: Whether the minority vote was informed, value_type: bool, search_terms: [informed vote, disclosure], time_varying: false}
+  mom_vote_uncoerced: {description: Whether the minority vote was uncoerced, value_type: bool, search_terms: [uncoerced, coercion], time_varying: false}
+  mom_approval_obtained: {description: Whether minority stockholders approved, value_type: bool, search_terms: [minority approval, vote approved], time_varying: false}
+  disinterested_stockholder_approval_obtained: {description: Whether disinterested stockholders approved, value_type: bool, search_terms: [disinterested stockholders, stockholder approval], time_varying: false}
+  disinterested_director_approval_obtained: {description: Whether disinterested directors approved, value_type: bool, search_terms: [disinterested directors, director approval], time_varying: false}
+  deal_value_usd: {description: Transaction value in US dollars, value_type: number, search_terms: [purchase price, consideration, value], time_varying: false}

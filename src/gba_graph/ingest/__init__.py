@@ -1,0 +1,1 @@
+"""Registry-constrained source ingestion."""

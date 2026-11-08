@@ -1,0 +1,60 @@
+- node_id: Source:sec_edgar
+  node_type: Source
+  label: SEC EDGAR
+  props:
+    registry_entry_id: sec_edgar
+  scope_frame: null
+  valid_from: null
+  valid_to: null
+  known_from: '2026-11-07'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Source:de_code_online
+  node_type: Source
+  label: Delaware Code Online
+  props:
+    registry_entry_id: de_code_online
+  scope_frame: null
+  valid_from: null
+  valid_to: null
+  known_from: '2026-11-07'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Source:de_legislature
+  node_type: Source
+  label: Delaware General Assembly
+  props:
+    registry_entry_id: de_legislature
+  scope_frame: null
+  valid_from: null
+  valid_to: null
+  known_from: '2026-11-07'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Source:de_courts
+  node_type: Source
+  label: Delaware Courts
+  props:
+    registry_entry_id: de_courts
+  scope_frame: null
+  valid_from: null
+  valid_to: null
+  known_from: '2026-11-07'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Source:courtlistener
+  node_type: Source
+  label: CourtListener
+  props:
+    registry_entry_id: courtlistener
+  scope_frame: null
+  valid_from: null
+  valid_to: null
+  known_from: '2026-11-07'
+  source_ids: []
+  origin: seed
+  audited: false

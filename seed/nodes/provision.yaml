@@ -1,0 +1,117 @@
+- node_id: Provision:de.dgcl.144b@2025-03-25
+  node_type: Provision
+  label: DGCL § 144(b), post-amendment
+  props:
+    code: DGCL
+    section: 144(b)
+    version_label: effective 2025-03-25
+    safe_harbor_when:
+      any:
+      - all:
+        - fact: committee_all_disinterested
+          eq: true
+        - fact: committee_power_to_say_no
+          eq: true
+        - fact: committee_power_to_negotiate
+          eq: true
+        - fact: committee_approval_obtained
+          eq: true
+      - any:
+        - fact: disinterested_stockholder_approval_obtained
+          eq: true
+        - fact: mom_approval_obtained
+          eq: true
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - other_controller_deal
+    applies_when: null
+    exceptions: []
+    non_application:
+      fact: litigation_commenced_on
+      lte: '2025-02-17'
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2025-03-25'
+    valid_to: null
+    source_spans: []
+    audited: false
+  valid_from: '2025-03-25'
+  valid_to: null
+  known_from: '2025-03-25'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Provision:de.dgcl.144c@2025-03-25
+  node_type: Provision
+  label: DGCL § 144(c), post-amendment
+  props:
+    code: DGCL
+    section: 144(c)
+    version_label: effective 2025-03-25
+    safe_harbor_when:
+      all:
+      - all:
+        - fact: committee_all_disinterested
+          eq: true
+        - fact: committee_power_to_say_no
+          eq: true
+        - fact: committee_power_to_negotiate
+          eq: true
+        - fact: committee_approval_obtained
+          eq: true
+      - any:
+        - fact: disinterested_stockholder_approval_obtained
+          eq: true
+        - fact: mom_approval_obtained
+          eq: true
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - going_private
+    applies_when: null
+    exceptions: []
+    non_application:
+      fact: litigation_commenced_on
+      lte: '2025-02-17'
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2025-03-25'
+    valid_to: null
+    source_spans: []
+    audited: false
+  valid_from: '2025-03-25'
+  valid_to: null
+  known_from: '2025-03-25'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Provision:de.dgcl.144@2024-12-01
+  node_type: Provision
+  label: DGCL § 144, pre-amendment (illustrative)
+  props:
+    code: DGCL
+    section: '144'
+    version_label: pre-amendment
+  scope_frame:
+    addressee_classes:
+    - interested_director
+    transaction_types:
+    - interested_director
+    applies_when: null
+    exceptions: []
+    non_application: null
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '1967-03-01'
+    valid_to: null
+    source_spans: []
+    audited: false
+  valid_from: '1967-03-01'
+  valid_to: '2025-03-25'
+  known_from: '2024-12-01'
+  source_ids: []
+  origin: seed
+  audited: false

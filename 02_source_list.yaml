@@ -1,0 +1,172 @@
+# 02 Approved source list (DRAFT: nothing here is "approved" until a human reviews each site's terms)
+#
+# Format: gba_contracts registry schema (Doc 00 s8). Every entry keeps terms_verified: false (rule R9).
+# "researched_on" notes below record what the drafter saw in search results on 2026-11-07. That is
+# NOT a human terms review. A human must read each site's terms and robots.txt, then fill
+# terms_url + terms_checked_on and flip terms_verified (CI rejects true without both).
+#
+# NEEDED FROM YOU (cannot be invented): the contact email for the user agent.
+#   AGENT_USER_AGENT="GuardedLegalAgent/1.0 (contact: <YOUR_EMAIL>)"      # EDGAR requires a declared contact
+#   INGEST_USER_AGENT=same string
+
+version: 1
+entries:
+
+  - entry_id: sec_edgar
+    name: SEC EDGAR
+    role: primary
+    authoritative: true
+    base_domains: [www.sec.gov, data.sec.gov, efts.sec.gov]
+    url_prefixes: ['https://www.sec.gov/Archives/', 'https://data.sec.gov/', 'https://efts.sec.gov/']
+    doc_types: [merger_agreement, proxy_statement, 8k, exhibit, filing_index]
+    access: api
+    requires_login: false
+    rate_limit: {requests_per_second: 2, burst: 4, max_concurrent: 2}   # published ceiling is 10 rps; stay well below
+    robots_respect: true
+    allowed_action_classes: [READ, SEARCH]
+    terms_verified: false
+    terms_url: null            # candidate: https://www.sec.gov/os/accessing-edgar-data
+    terms_checked_on: null
+    phase: MVP
+    researched_on: 2026-11-07
+    notes: >
+      SEC page says the max request rate is 10 requests/second, asks automated clients to declare a
+      user agent with contact details, and says it does not allow botnets or automated crawling outside
+      its policy. Use data.sec.gov JSON APIs and explicit URLs from deals.yaml; no crawling.
+
+  - entry_id: de_code_online
+    name: Delaware Code Online
+    role: primary
+    authoritative: true
+    base_domains: [delcode.delaware.gov]
+    url_prefixes: ['https://delcode.delaware.gov/']
+    doc_types: [statute]
+    access: adapter
+    requires_login: false
+    rate_limit: {requests_per_second: 1, burst: 2, max_concurrent: 1}
+    robots_respect: true
+    allowed_action_classes: [READ, SEARCH]
+    terms_verified: false
+    terms_url: null            # to be found on the site (disclaimer page exists)
+    terms_checked_on: null
+    phase: MVP
+    researched_on: 2026-11-07
+    notes: >
+      Site carries a disclaimer (no warranty; seek counsel). The index page seen in search said the
+      version includes acts enacted as of 2026-01-30 up to 85 Del. Laws c. 236, so it LAGS later
+      amendments: pair with session laws (de_legislature) for anything newer. Ingest statutory text
+      only; historic Justia copies mention LexisNexis editorial staff, so exclude annotations/headnotes.
+      Reuse terms not confirmed: HUMAN MUST READ.
+
+  - entry_id: de_legislature
+    name: Delaware General Assembly (bills and session laws)
+    role: primary
+    authoritative: true
+    base_domains: [legis.delaware.gov]
+    url_prefixes: ['https://legis.delaware.gov/']
+    doc_types: [bill, session_law]
+    access: adapter
+    requires_login: false
+    rate_limit: {requests_per_second: 1, burst: 2, max_concurrent: 1}
+    robots_respect: true
+    allowed_action_classes: [READ, SEARCH]
+    terms_verified: false
+    terms_url: null
+    terms_checked_on: null
+    phase: MVP
+    researched_on: 2026-11-07
+    notes: >
+      Source of effective dates and amendment text (valid_from / valid_to, pendency carve-outs).
+      Session-law chapter pages (SessionLaws/Chapter?id=...) and BillDetail pages were seen in search.
+      Needed bills: SB 21 (2025), the 2025 Title 8 acts, and 2026 HB 353 (amends Title 8; content not read).
+
+  - entry_id: de_courts
+    name: Delaware Courts (opinions and orders)
+    role: primary
+    authoritative: true
+    base_domains: [courts.delaware.gov]
+    url_prefixes: ['https://courts.delaware.gov/']
+    doc_types: [opinion]
+    access: adapter
+    requires_login: false
+    rate_limit: {requests_per_second: 1, burst: 2, max_concurrent: 1}
+    robots_respect: true
+    allowed_action_classes: [READ, SEARCH]
+    terms_verified: false
+    terms_url: null            # site footer links a "Terms of Use" page
+    terms_checked_on: null
+    phase: MVP
+    researched_on: 2026-11-07
+    notes: >
+      Official site; has an "Opinions & Orders" section and a Terms of Use link. Exact opinion URL
+      patterns, robots rules and reuse terms NOT verified. Rutledge v. Clearway (2026-02-27) and
+      Match Group (2024-04-04) should be fetched from here and cross-checked.
+
+  - entry_id: courtlistener
+    name: CourtListener (Free Law Project)
+    role: crosscheck
+    authoritative: false
+    base_domains: [www.courtlistener.com, storage.courtlistener.com]
+    url_prefixes: ['https://www.courtlistener.com/', 'https://storage.courtlistener.com/']
+    doc_types: [opinion, citation_lookup]
+    access: api
+    requires_login: false
+    rate_limit: {requests_per_second: 0.01, burst: 1, max_concurrent: 1}   # ~36/hr; a daily cap also applies (see notes); schema has no daily field
+    robots_respect: true
+    allowed_action_classes: [READ, SEARCH]
+    terms_verified: false
+    terms_url: null            # candidate: Free Law Project "allowed API usage" policy
+    terms_checked_on: null
+    phase: MVP
+    researched_on: 2026-11-07
+    notes: >
+      CORRECTION to the earlier "about 5,000 per day" figure: Free Law Project announced on 2026-05-07
+      that full API access now comes with membership and that the old 5,000/hour default was reduced.
+      A third-party summary of the FLP docs gives new-account defaults of 5/min, 50/hr, 125/day.
+      Verify the current numbers on FLP's own page. For the training graph use the QUARTERLY BULK
+      EXPORT (citation graph is included) instead of the API, and use the API token only for
+      citation-lookup spot checks. Token goes in env COURTLISTENER_TOKEN.
+
+# ---------------------------------------------------------------------------------------------
+# Proposed additions (need a CR or an A/B decision; not in the canonical registry yet)
+# ---------------------------------------------------------------------------------------------
+proposed_entries:
+
+  - entry_id: de_corpfiles
+    name: Delaware Division of Corporations (annual corporate law amendment lists)
+    role: crosscheck
+    authoritative: true
+    base_domains: [corpfiles.delaware.gov]
+    url_prefixes: ['https://corpfiles.delaware.gov/']
+    doc_types: [amendment_list]
+    access: adapter
+    terms_verified: false
+    notes: >
+      Lists every act amending Title 8 per year with links to bills (2024, 2025 and 2026 lists were seen:
+      2026 includes HB 353 amending Title 8). Use it as the enumeration checklist so no amendment is missed.
+
+  - entry_id: courtlistener_bulk
+    name: CourtListener bulk data (quarterly export incl. citation graph and parentheticals)
+    role: crosscheck
+    authoritative: false
+    access: bulk
+    terms_verified: false
+    notes: >
+      Bulk page: https://www.courtlistener.com/api/bulk-info/ . Citation graph exported quarterly; parentheticals
+      available in bulk only. Use for D1 (structural training graph). Needs its own registry entry because the
+      current courtlistener entry is API-only.
+
+  - entry_id: caselaw_access_project
+    name: Harvard Caselaw Access Project (static bulk)
+    role: crosscheck
+    authoritative: false
+    access: bulk
+    terms_verified: false
+    notes: >
+      Harvard LIL said in 2024 that the original access limits expired (March 2024) and the data can be
+      released without restriction. Historical coverage only (digitized reporters through 2018). Confirm the
+      current distribution URL and terms before use.
+
+# Not for training or fetching (reference only): law-firm client alerts (Sidley, Gibson Dunn, DLA Piper,
+# Benesch, Morgan Lewis, McGuire Woods, etc.) were used by the drafter to cross-check dates. They are
+# copyrighted commentary and must not enter the graph as ground truth.

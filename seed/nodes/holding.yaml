@@ -1,0 +1,108 @@
+- node_id: Holding:mfw-2014
+  node_type: Holding
+  label: MFW dual-protection framework (illustrative)
+  props:
+    case_node_id: Case:in-re-mfw-shareholders-litigation-2014
+    proposition: Business-judgment review when both protections are in place from
+      the outset.
+    bjr_when:
+      all:
+      - all:
+        - all:
+          - fact: committee_all_disinterested
+            eq: true
+          - fact: committee_power_to_say_no
+            eq: true
+          - fact: committee_power_to_negotiate
+            eq: true
+          - fact: committee_approval_obtained
+            eq: true
+        - fact: committee_formed_before_substantive_negotiation
+          eq: true
+        - fact: committee_free_to_select_advisors
+          eq: true
+        - fact: committee_duty_of_care_met
+          eq: true
+      - fact: mom_condition_in_agreement
+        eq: true
+      - fact: mom_vote_informed
+        eq: true
+      - fact: mom_vote_uncoerced
+        eq: true
+      - fact: mom_approval_obtained
+        eq: true
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - going_private
+    - other_controller_deal
+    applies_when: null
+    exceptions: []
+    non_application: null
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2014-06-24'
+    valid_to: null
+    source_spans: []
+    audited: false
+  valid_from: '2014-06-24'
+  valid_to: null
+  known_from: '2014-06-24'
+  source_ids: []
+  origin: seed
+  audited: false
+- node_id: Holding:match-group-2024
+  node_type: Holding
+  label: Match Group dual protections (illustrative)
+  props:
+    case_node_id: Case:in-re-match-group-2024
+    proposition: Both protections must be effective for business-judgment review under
+      the holding.
+    bjr_when:
+      all:
+      - all:
+        - all:
+          - fact: committee_all_disinterested
+            eq: true
+          - fact: committee_power_to_say_no
+            eq: true
+          - fact: committee_power_to_negotiate
+            eq: true
+          - fact: committee_approval_obtained
+            eq: true
+        - fact: committee_formed_before_substantive_negotiation
+          eq: true
+        - fact: committee_free_to_select_advisors
+          eq: true
+        - fact: committee_duty_of_care_met
+          eq: true
+      - fact: mom_condition_in_agreement
+        eq: true
+      - fact: mom_vote_informed
+        eq: true
+      - fact: mom_vote_uncoerced
+        eq: true
+      - fact: mom_approval_obtained
+        eq: true
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - going_private
+    - other_controller_deal
+    applies_when: null
+    exceptions: []
+    non_application: null
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2024-04-04'
+    valid_to: null
+    source_spans: []
+    audited: false
+  valid_from: '2024-04-04'
+  valid_to: null
+  known_from: '2024-04-04'
+  source_ids: []
+  origin: seed
+  audited: false

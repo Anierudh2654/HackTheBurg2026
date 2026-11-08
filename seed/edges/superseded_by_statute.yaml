@@ -1,0 +1,32 @@
+- edge_id: edge_94623511e68d5ae7
+  src: Provision:de.dgcl.144b@2025-03-25
+  dst: Holding:match-group-2024
+  edge_type: superseded_by_statute
+  condition:
+    not:
+      fact: litigation_commenced_on
+      lte: '2025-02-17'
+  props: {}
+  valid_from: '2025-03-25'
+  valid_to: null
+  known_from: '2025-03-25'
+  source_span: null
+  confidence: null
+  origin: seed
+  audited: false
+- edge_id: edge_537ebc9d95056fc8
+  src: Provision:de.dgcl.144c@2025-03-25
+  dst: Holding:match-group-2024
+  edge_type: superseded_by_statute
+  condition:
+    not:
+      fact: litigation_commenced_on
+      lte: '2025-02-17'
+  props: {}
+  valid_from: '2025-03-25'
+  valid_to: null
+  known_from: '2025-03-25'
+  source_span: null
+  confidence: null
+  origin: seed
+  audited: false

@@ -1,0 +1,2802 @@
+{
+ "format": "gba-training-graph/1",
+ "contract_version": "1.0.0",
+ "status": "DRAFT_UNREVIEWED_NOT_GROUND_TRUTH",
+ "generated_by": "Claude (LLM draft; not a lawyer)",
+ "generated_on": "2026-11-07",
+ "notes": [
+  "Separate from the illustrative serving seed. Node ids match Doc 00 s13 where they overlap; dates/props must be reconciled with gba_contracts seed_graph.json.",
+  "origin=llm_extracted and audited=false everywhere: per Doc 02 s9.6 never use for evaluation until a lawyer signs off.",
+  "source_ids/source_span are empty: they are created when documents are registered (hash-addressed). secondary_hints are law-firm alerts used only to cross-check dates.",
+  "known_from=1900-01-01 marks conceptual nodes that are always visible (sentinel)."
+ ],
+ "nodes": [
+  {
+   "node_id": "Court:de-supreme",
+   "node_type": "Court",
+   "label": "Delaware Supreme Court",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "court_id": "de-supreme",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Court:de-chancery",
+   "node_type": "Court",
+   "label": "Delaware Court of Chancery",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "court_id": "de-chancery",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Source:sec_edgar",
+   "node_type": "Source",
+   "label": "SEC EDGAR",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "registry_entry_id": "sec_edgar",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Source:de_code_online",
+   "node_type": "Source",
+   "label": "Delaware Code Online",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "registry_entry_id": "de_code_online",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Source:de_legislature",
+   "node_type": "Source",
+   "label": "Delaware General Assembly",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "registry_entry_id": "de_legislature",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Source:de_courts",
+   "node_type": "Source",
+   "label": "Delaware Courts (opinions)",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "registry_entry_id": "de_courts",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Source:courtlistener",
+   "node_type": "Source",
+   "label": "CourtListener (Free Law Project)",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "registry_entry_id": "courtlistener",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "TransactionType:going_private",
+   "node_type": "TransactionType",
+   "label": "going private",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "going_private",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "TransactionType:other_controller_deal",
+   "node_type": "TransactionType",
+   "label": "other controller deal",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "other_controller_deal",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "TransactionType:third_party_sale",
+   "node_type": "TransactionType",
+   "label": "third party sale",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "third_party_sale",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "TransactionType:interested_director",
+   "node_type": "TransactionType",
+   "label": "interested director",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "interested_director",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "TransactionType:other",
+   "node_type": "TransactionType",
+   "label": "other",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "other",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ActorClass:controller",
+   "node_type": "ActorClass",
+   "label": "controller",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "controller",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ActorClass:control_group",
+   "node_type": "ActorClass",
+   "label": "control group",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "control_group",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ActorClass:independent_director",
+   "node_type": "ActorClass",
+   "label": "independent director",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "independent_director",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ActorClass:interested_director",
+   "node_type": "ActorClass",
+   "label": "interested director",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "interested_director",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ActorClass:disinterested_stockholder",
+   "node_type": "ActorClass",
+   "label": "disinterested stockholder",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "disinterested_stockholder",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ActorClass:minority_stockholder",
+   "node_type": "ActorClass",
+   "label": "minority stockholder",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "minority_stockholder",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Standard:business-judgment",
+   "node_type": "Standard",
+   "label": "Business judgment rule",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "business_judgment",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Standard:entire-fairness",
+   "node_type": "Standard",
+   "label": "Entire fairness",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "value": "entire_fairness",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_approval_obtained",
+   "node_type": "ProcessFact",
+   "label": "committee_approval_obtained",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_approval_obtained",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-approval",
+   "node_type": "Element",
+   "label": "committee approval",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_approval_obtained"
+    ],
+    "met_when": {
+     "fact": "committee_approval_obtained",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:mom_approval_obtained",
+   "node_type": "ProcessFact",
+   "label": "mom_approval_obtained",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "mom_approval_obtained",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:mom-approval",
+   "node_type": "Element",
+   "label": "mom approval",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "mom_approval_obtained"
+    ],
+    "met_when": {
+     "fact": "mom_approval_obtained",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_all_disinterested",
+   "node_type": "ProcessFact",
+   "label": "committee_all_disinterested",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_all_disinterested",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-independence",
+   "node_type": "Element",
+   "label": "committee independence",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_all_disinterested"
+    ],
+    "met_when": {
+     "fact": "committee_all_disinterested",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_power_to_say_no",
+   "node_type": "ProcessFact",
+   "label": "committee_power_to_say_no",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_power_to_say_no",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-power-to-say-no",
+   "node_type": "Element",
+   "label": "committee power to say no",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_power_to_say_no"
+    ],
+    "met_when": {
+     "fact": "committee_power_to_say_no",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_power_to_negotiate",
+   "node_type": "ProcessFact",
+   "label": "committee_power_to_negotiate",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_power_to_negotiate",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-power-to-negotiate",
+   "node_type": "Element",
+   "label": "committee power to negotiate",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_power_to_negotiate"
+    ],
+    "met_when": {
+     "fact": "committee_power_to_negotiate",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_free_to_select_advisors",
+   "node_type": "ProcessFact",
+   "label": "committee_free_to_select_advisors",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_free_to_select_advisors",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-free-to-select-advisors",
+   "node_type": "Element",
+   "label": "committee free to select advisors",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_free_to_select_advisors"
+    ],
+    "met_when": {
+     "fact": "committee_free_to_select_advisors",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_duty_of_care_met",
+   "node_type": "ProcessFact",
+   "label": "committee_duty_of_care_met",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_duty_of_care_met",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-duty-of-care",
+   "node_type": "Element",
+   "label": "committee duty of care",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_duty_of_care_met"
+    ],
+    "met_when": {
+     "fact": "committee_duty_of_care_met",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:committee_formed_before_substantive_negotiation",
+   "node_type": "ProcessFact",
+   "label": "committee_formed_before_substantive_negotiation",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "committee_formed_before_substantive_negotiation",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:committee-ab-initio",
+   "node_type": "Element",
+   "label": "committee ab initio",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "committee_formed_before_substantive_negotiation"
+    ],
+    "met_when": {
+     "fact": "committee_formed_before_substantive_negotiation",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:mom_vote_informed",
+   "node_type": "ProcessFact",
+   "label": "mom_vote_informed",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "mom_vote_informed",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:mom-informed",
+   "node_type": "Element",
+   "label": "mom informed",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "mom_vote_informed"
+    ],
+    "met_when": {
+     "fact": "mom_vote_informed",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:mom_vote_uncoerced",
+   "node_type": "ProcessFact",
+   "label": "mom_vote_uncoerced",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "mom_vote_uncoerced",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:mom-uncoerced",
+   "node_type": "Element",
+   "label": "mom uncoerced",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "mom_vote_uncoerced"
+    ],
+    "met_when": {
+     "fact": "mom_vote_uncoerced",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "ProcessFact:disinterested_stockholder_approval_obtained",
+   "node_type": "ProcessFact",
+   "label": "disinterested_stockholder_approval_obtained",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_key": "disinterested_stockholder_approval_obtained",
+    "known_from_is_sentinel": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Element:disinterested-stockholder-approval",
+   "node_type": "Element",
+   "label": "disinterested stockholder approval",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "fact_keys": [
+     "disinterested_stockholder_approval_obtained"
+    ],
+    "met_when": {
+     "fact": "disinterested_stockholder_approval_obtained",
+     "eq": true
+    },
+    "known_from_is_sentinel": true,
+    "note": "ids match Doc 00 s13; reconcile props/dates with gba_contracts seed_graph.json (not available to the drafter)"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Case:weinberger-v-uop-1983",
+   "node_type": "Case",
+   "label": "Weinberger v. UOP, Inc.",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_name": "Weinberger v. UOP, Inc.",
+    "decided_on": "1983-02-01",
+    "court_id": "de-supreme",
+    "citation_string": "457 A.2d 701",
+    "docket": null,
+    "confirm": [
+     "decided_on"
+    ]
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1983-02-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Case:kahn-v-m-and-f-worldwide-2014",
+   "node_type": "Case",
+   "label": "Kahn v. M & F Worldwide Corp.",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_name": "Kahn v. M & F Worldwide Corp.",
+    "decided_on": "2014-03-14",
+    "court_id": "de-supreme",
+    "citation_string": "88 A.3d 635",
+    "docket": null,
+    "confirm": [
+     "decided_on"
+    ]
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Case:corwin-v-kkr-financial-holdings-2015",
+   "node_type": "Case",
+   "label": "Corwin v. KKR Financial Holdings LLC",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_name": "Corwin v. KKR Financial Holdings LLC",
+    "decided_on": "2015-10-02",
+    "court_id": "de-supreme",
+    "citation_string": "125 A.3d 304",
+    "docket": null,
+    "confirm": [
+     "decided_on"
+    ]
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2015-10-02",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Case:in-re-match-group-2024",
+   "node_type": "Case",
+   "label": "In re Match Group, Inc. Derivative Litigation",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_name": "In re Match Group, Inc. Derivative Litigation",
+    "decided_on": "2024-04-04",
+    "court_id": "de-supreme",
+    "citation_string": "315 A.3d 446",
+    "docket": "No. 368, 2022",
+    "verified_by_search": true
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Case:rutledge-v-clearway-energy-group-2026",
+   "node_type": "Case",
+   "label": "Rutledge v. Clearway Energy Group LLC",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_name": "Rutledge v. Clearway Energy Group LLC",
+    "decided_on": "2026-02-27",
+    "court_id": "de-supreme",
+    "citation_string": "No. 248, 2025 (Del. Feb. 27, 2026)",
+    "docket": "No. 248, 2025",
+    "verified_by_search": true,
+    "note": "WL identifier seen in secondary source; not used as canonical citation"
+   },
+   "scope_frame": null,
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2026-02-27",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Holding:weinberger-1983",
+   "node_type": "Holding",
+   "label": "Weinberger: entire fairness for cash-out merger (fair dealing and fair price)",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_node_id": "Case:weinberger-v-uop-1983",
+    "proposition": "A cash-out merger by a controlling parent is reviewed for entire fairness, comprising fair dealing and fair price."
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "controller"
+    ],
+    "transaction_types": [
+     "going_private"
+    ],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": null,
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "1983-02-01",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "1983-02-01",
+   "valid_to": null,
+   "known_from": "1983-02-01",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Holding:mfw-2014",
+   "node_type": "Holding",
+   "label": "MFW: business judgment review for conditioned controller squeeze-out",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_node_id": "Case:kahn-v-m-and-f-worldwide-2014",
+    "proposition": "Business judgment review applies to a controller squeeze-out merger if conditioned from the outset on approval by an independent, empowered special committee and an informed, uncoerced majority-of-the-minority vote.",
+    "bjr_when": {
+     "all": [
+      {
+       "all": [
+        {
+         "fact": "committee_all_disinterested",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_say_no",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_negotiate",
+         "eq": true
+        },
+        {
+         "fact": "committee_approval_obtained",
+         "eq": true
+        },
+        {
+         "fact": "committee_formed_before_substantive_negotiation",
+         "eq": true
+        },
+        {
+         "fact": "committee_free_to_select_advisors",
+         "eq": true
+        },
+        {
+         "fact": "committee_duty_of_care_met",
+         "eq": true
+        }
+       ]
+      },
+      {
+       "fact": "mom_condition_in_agreement",
+       "eq": true
+      },
+      {
+       "fact": "mom_vote_informed",
+       "eq": true
+      },
+      {
+       "fact": "mom_vote_uncoerced",
+       "eq": true
+      },
+      {
+       "fact": "mom_approval_obtained",
+       "eq": true
+      }
+     ]
+    }
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "controller",
+     "control_group"
+    ],
+    "transaction_types": [
+     "going_private"
+    ],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": null,
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2014-03-14",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2014-03-14",
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Holding:corwin-2015",
+   "node_type": "Holding",
+   "label": "Corwin: cleansing stockholder vote in non-controller transaction",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_node_id": "Case:corwin-v-kkr-financial-holdings-2015",
+    "proposition": "A transaction not involving a controlling stockholder, approved by a fully informed, uncoerced vote of disinterested stockholders, receives business judgment review.",
+    "bjr_when": {
+     "fact": "disinterested_stockholder_approval_obtained",
+     "eq": true
+    },
+    "lawyer_question": "No fact keys exist for 'fully informed / uncoerced' outside the controller MFW context; bjr_when is under-specified. Propose CR for general stockholder_vote_informed / stockholder_vote_uncoerced keys?"
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "disinterested_stockholder"
+    ],
+    "transaction_types": [
+     "third_party_sale"
+    ],
+    "applies_when": {
+     "fact": "controller_present",
+     "eq": false
+    },
+    "exceptions": [],
+    "non_application": null,
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2015-10-02",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2015-10-02",
+   "valid_to": null,
+   "known_from": "2015-10-02",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Holding:match-group-2024",
+   "node_type": "Holding",
+   "label": "Match Group: MFW required for business judgment in controller transactions generally",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_node_id": "Case:in-re-match-group-2024",
+    "proposition": "Entire fairness applies to controller transactions in which the controller receives a non-ratable benefit unless all MFW conditions are met.",
+    "bjr_when": {
+     "all": [
+      {
+       "all": [
+        {
+         "fact": "committee_all_disinterested",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_say_no",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_negotiate",
+         "eq": true
+        },
+        {
+         "fact": "committee_approval_obtained",
+         "eq": true
+        },
+        {
+         "fact": "committee_formed_before_substantive_negotiation",
+         "eq": true
+        },
+        {
+         "fact": "committee_free_to_select_advisors",
+         "eq": true
+        },
+        {
+         "fact": "committee_duty_of_care_met",
+         "eq": true
+        }
+       ]
+      },
+      {
+       "fact": "mom_condition_in_agreement",
+       "eq": true
+      },
+      {
+       "fact": "mom_vote_informed",
+       "eq": true
+      },
+      {
+       "fact": "mom_vote_uncoerced",
+       "eq": true
+      },
+      {
+       "fact": "mom_approval_obtained",
+       "eq": true
+      }
+     ]
+    }
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "controller",
+     "control_group"
+    ],
+    "transaction_types": [
+     "other_controller_deal",
+     "going_private"
+    ],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": null,
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2024-04-04",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2024-04-04",
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Holding:match-group-committee-independence-2024",
+   "node_type": "Holding",
+   "label": "Match Group: every special committee member must be independent",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_node_id": "Case:in-re-match-group-2024",
+    "proposition": "To satisfy MFW's committee prong, all members of the special committee, not merely a majority, must be independent of the controller."
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "controller"
+    ],
+    "transaction_types": [
+     "other_controller_deal",
+     "going_private"
+    ],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": null,
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2024-04-04",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2024-04-04",
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Holding:rutledge-2026",
+   "node_type": "Holding",
+   "label": "Rutledge: SB 21 section 144 amendments upheld as constitutional",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "case_node_id": "Case:rutledge-v-clearway-energy-group-2026",
+    "proposition": "The 2025 amendments to DGCL section 144, including the safe harbors and their retroactive application, do not violate the Delaware Constitution (certified questions answered in the negative)."
+   },
+   "scope_frame": {
+    "addressee_classes": [],
+    "transaction_types": [],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": null,
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2026-02-27",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2026-02-27",
+   "valid_to": null,
+   "known_from": "2026-02-27",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Provision:de.dgcl.144b@2025-03-25",
+   "node_type": "Provision",
+   "label": "8 Del. C. section 144(b) (as amended by SB 21): controller transactions other than going private",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "code": "8 Del. C.",
+    "section": "144(b)",
+    "version_label": "as amended 2025-03-25 (SB 21)",
+    "safe_harbor_when": {
+     "any": [
+      {
+       "all": [
+        {
+         "fact": "committee_all_disinterested",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_say_no",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_negotiate",
+         "eq": true
+        },
+        {
+         "fact": "committee_approval_obtained",
+         "eq": true
+        }
+       ]
+      },
+      {
+       "any": [
+        {
+         "fact": "disinterested_stockholder_approval_obtained",
+         "eq": true
+        },
+        {
+         "fact": "mom_approval_obtained",
+         "eq": true
+        }
+       ]
+      }
+     ]
+    },
+    "secondary_hints": [
+     "https://www.beneschlaw.com/insight/delaware-amends-dgcl-section-144-to-add-safe-harbors-for-interested-and-controlling-stockholder-transactions/",
+     "https://marketedge.dlapiper.com/2025/05/amendments-to-delaware-general-corporation-law-expand-safe-harbor-for-controlling-stockholder-transactions-and-circumscribe-books-and-records-demand-obligations/"
+    ],
+    "modeling_gap": "Statute also requires disclosure to the committee or stockholders; no fact key exists for it (CR needed). Stockholder prong modeled per Doc 02 s9.3 (either fact)."
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "controller",
+     "control_group"
+    ],
+    "transaction_types": [
+     "other_controller_deal"
+    ],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": {
+     "fact": "litigation_commenced_on",
+     "lte": "2025-02-17"
+    },
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2025-03-25",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2025-03-25",
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "node_id": "Provision:de.dgcl.144c@2025-03-25",
+   "node_type": "Provision",
+   "label": "8 Del. C. section 144(c) (as amended by SB 21): going private transactions",
+   "props": {
+    "review_status": "draft_unreviewed",
+    "code": "8 Del. C.",
+    "section": "144(c)",
+    "version_label": "as amended 2025-03-25 (SB 21)",
+    "safe_harbor_when": {
+     "all": [
+      {
+       "all": [
+        {
+         "fact": "committee_all_disinterested",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_say_no",
+         "eq": true
+        },
+        {
+         "fact": "committee_power_to_negotiate",
+         "eq": true
+        },
+        {
+         "fact": "committee_approval_obtained",
+         "eq": true
+        }
+       ]
+      },
+      {
+       "any": [
+        {
+         "fact": "disinterested_stockholder_approval_obtained",
+         "eq": true
+        },
+        {
+         "fact": "mom_approval_obtained",
+         "eq": true
+        }
+       ]
+      }
+     ]
+    },
+    "secondary_hints": [
+     "https://www.beneschlaw.com/insight/delaware-amends-dgcl-section-144-to-add-safe-harbors-for-interested-and-controlling-stockholder-transactions/",
+     "https://marketedge.dlapiper.com/2025/05/amendments-to-delaware-general-corporation-law-expand-safe-harbor-for-controlling-stockholder-transactions-and-circumscribe-books-and-records-demand-obligations/"
+    ],
+    "modeling_gap": "Going private defined by reference to Rule 13e-3 for public companies; not modeled beyond transaction_type."
+   },
+   "scope_frame": {
+    "addressee_classes": [
+     "controller",
+     "control_group"
+    ],
+    "transaction_types": [
+     "going_private"
+    ],
+    "applies_when": null,
+    "exceptions": [],
+    "non_application": {
+     "fact": "litigation_commenced_on",
+     "lte": "2025-02-17"
+    },
+    "defined_terms": {},
+    "jurisdiction": "US-DE",
+    "valid_from": "2025-03-25",
+    "valid_to": null,
+    "source_spans": [],
+    "audited": false
+   },
+   "valid_from": "2025-03-25",
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_ids": [],
+   "origin": "llm_extracted",
+   "audited": false
+  }
+ ],
+ "edges": [
+  {
+   "edge_id": "edge_756f1f9a5c845e96",
+   "src": "Case:in-re-match-group-2024",
+   "dst": "Case:kahn-v-m-and-f-worldwide-2014",
+   "edge_type": "cites",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Match Group applies and extends the MFW framework.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_6112680e3678a1d9",
+   "src": "Case:kahn-v-m-and-f-worldwide-2014",
+   "dst": "Case:weinberger-v-uop-1983",
+   "edge_type": "cites",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW discusses Weinberger's entire fairness standard.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_9245333e708d0aa3",
+   "src": "Holding:match-group-2024",
+   "dst": "Holding:mfw-2014",
+   "edge_type": "follows",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Match Group extends MFW to all controller transactions with non-ratable benefit.",
+    "review_status": "draft_unreviewed",
+    "nature": "extends"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_d9a89ff4bf9344b1",
+   "src": "Holding:rutledge-2026",
+   "dst": "Provision:de.dgcl.144b@2025-03-25",
+   "edge_type": "interprets",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Rutledge upholds SB 21 including 144(b) safe harbor; relation is constitutional validity, not construction.",
+    "review_status": "draft_unreviewed",
+    "nature": "upholds_constitutionality"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2026-02-27",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_38141b7b45d3b14a",
+   "src": "Holding:rutledge-2026",
+   "dst": "Provision:de.dgcl.144c@2025-03-25",
+   "edge_type": "interprets",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Rutledge upholds SB 21 including 144(c); relation is constitutional validity, not construction.",
+    "review_status": "draft_unreviewed",
+    "nature": "upholds_constitutionality"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2026-02-27",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_499eba67f2ca5ea1",
+   "src": "Court:de-supreme",
+   "dst": "Court:de-chancery",
+   "edge_type": "binds",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Supreme Court decisions bind the Court of Chancery.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_94623511e68d5ae7",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Holding:match-group-2024",
+   "edge_type": "superseded_by_statute",
+   "condition": {
+    "not": {
+     "fact": "litigation_commenced_on",
+     "lte": "2025-02-17"
+    }
+   },
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Per Doc 00 s13 fixture: 144(b) displaces Match Group's holding for non-going-private controller deals, except where litigation was commenced on or before 2025-02-17.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": "2025-03-25",
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_7439836bdf652b88",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_ba07cb58740e849c",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:mom-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_ed427386ef124d96",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-independence",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_984da4ebeb35ff97",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-power-to-say-no",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_2de830587bcc898e",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-power-to-negotiate",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_93c912e0fc3fb296",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-free-to-select-advisors",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_1788803f71d9bcbf",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-duty-of-care",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_883a1616197d1f4a",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:committee-ab-initio",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_ffffb5c4eef5e024",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:mom-informed",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_6ec1c41c80c0103c",
+   "src": "Holding:mfw-2014",
+   "dst": "Element:mom-uncoerced",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW's enumerated conditions for business judgment review.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_92106ba7491fe4dc",
+   "src": "Holding:mfw-2014",
+   "dst": "Standard:business-judgment",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "MFW: conditions under which business judgment review applies.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_c3d02bbd7331f2e3",
+   "src": "Holding:weinberger-1983",
+   "dst": "Standard:entire-fairness",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Weinberger: entire fairness standard.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1983-02-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_b8bf0b9dc90cc0a2",
+   "src": "Holding:match-group-2024",
+   "dst": "Element:committee-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Match Group requires both MFW prongs and fully independent committee.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_974f403104f6a335",
+   "src": "Holding:match-group-2024",
+   "dst": "Element:mom-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Match Group requires both MFW prongs and fully independent committee.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_4a7b066acb07601b",
+   "src": "Holding:match-group-2024",
+   "dst": "Element:committee-independence",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Match Group requires both MFW prongs and fully independent committee.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_412a49b24399e8ac",
+   "src": "Holding:match-group-committee-independence-2024",
+   "dst": "Element:committee-independence",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Holding is specifically about committee independence.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_93dd0dc202b7ca66",
+   "src": "Holding:corwin-2015",
+   "dst": "Element:disinterested-stockholder-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Corwin concerns disinterested stockholder approval in non-controller deals.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2015-10-02",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_a90473adb8a74b11",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Element:committee-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(b) alternative committee or disinterested-stockholder prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_7e8c0d48465d7d2a",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Element:committee-independence",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(b) alternative committee or disinterested-stockholder prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_50180d7adb01b3b2",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Element:committee-power-to-negotiate",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(b) alternative committee or disinterested-stockholder prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_e4cd8924d51c5fff",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Element:committee-power-to-say-no",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(b) alternative committee or disinterested-stockholder prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_514890b160f2e53b",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Element:disinterested-stockholder-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(b) alternative committee or disinterested-stockholder prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_35d99c85d9540616",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Element:mom-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(b) alternative committee or disinterested-stockholder prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_1206abfab90407e8",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Element:committee-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(c) requires both prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_94fe75b8e5cd506c",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Element:committee-independence",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(c) requires both prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_553ea1a252ae762b",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Element:committee-power-to-negotiate",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(c) requires both prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_683bbddab019a070",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Element:committee-power-to-say-no",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(c) requires both prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_3db7d34b3c43780e",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Element:disinterested-stockholder-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(c) requires both prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_45b81f6358ae42b9",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Element:mom-approval",
+   "edge_type": "addresses",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "144(c) requires both prongs; exact elements need statutory-text confirmation.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_1cbdedf3b9234567",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "TransactionType:other_controller_deal",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_892653abe5bd0018",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "ActorClass:controller",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_25fbdfc2a9b4e10c",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "ActorClass:control_group",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_f325c1d18cc944dc",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "TransactionType:going_private",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_96618786f38ed69b",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "ActorClass:controller",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_49371058e2c4f9c6",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "ActorClass:control_group",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_0093c04fb5f9bc98",
+   "src": "Holding:mfw-2014",
+   "dst": "TransactionType:going_private",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_a9b8f57cddf7bc3b",
+   "src": "Holding:mfw-2014",
+   "dst": "ActorClass:controller",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_e0d8da313b5868b1",
+   "src": "Holding:mfw-2014",
+   "dst": "ActorClass:control_group",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_9c93e5f84e8c87a6",
+   "src": "Holding:match-group-2024",
+   "dst": "TransactionType:other_controller_deal",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_cf624c0126d53656",
+   "src": "Holding:match-group-2024",
+   "dst": "TransactionType:going_private",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_a5712988179dd5a3",
+   "src": "Holding:match-group-2024",
+   "dst": "ActorClass:controller",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_11aada8f58a71653",
+   "src": "Holding:match-group-2024",
+   "dst": "ActorClass:control_group",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_ff325fef88da553f",
+   "src": "Holding:match-group-committee-independence-2024",
+   "dst": "TransactionType:other_controller_deal",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_83743f950b295e2e",
+   "src": "Holding:match-group-committee-independence-2024",
+   "dst": "TransactionType:going_private",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_425b3bc2c9c33dd8",
+   "src": "Holding:match-group-committee-independence-2024",
+   "dst": "ActorClass:controller",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_406c1e34ae6a92b8",
+   "src": "Holding:corwin-2015",
+   "dst": "TransactionType:third_party_sale",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2015-10-02",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_146139ce332ecd85",
+   "src": "Holding:corwin-2015",
+   "dst": "ActorClass:disinterested_stockholder",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2015-10-02",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_60abc07fe04c44b9",
+   "src": "Holding:weinberger-1983",
+   "dst": "TransactionType:going_private",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1983-02-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_eae3977cdfe6b9f5",
+   "src": "Holding:weinberger-1983",
+   "dst": "ActorClass:controller",
+   "edge_type": "applies_to",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Matches the node's scope frame.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1983-02-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_51fcfe6b54762595",
+   "src": "ProcessFact:committee_approval_obtained",
+   "dst": "Element:committee-approval",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_639891947617c765",
+   "src": "ProcessFact:mom_approval_obtained",
+   "dst": "Element:mom-approval",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_8e6182420d094b04",
+   "src": "ProcessFact:committee_all_disinterested",
+   "dst": "Element:committee-independence",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_f4b859799003de51",
+   "src": "ProcessFact:committee_power_to_say_no",
+   "dst": "Element:committee-power-to-say-no",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_5ea61aae09bbddbb",
+   "src": "ProcessFact:committee_power_to_negotiate",
+   "dst": "Element:committee-power-to-negotiate",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_22b8aca7a94f6239",
+   "src": "ProcessFact:committee_free_to_select_advisors",
+   "dst": "Element:committee-free-to-select-advisors",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_c94dc383288b86ff",
+   "src": "ProcessFact:committee_duty_of_care_met",
+   "dst": "Element:committee-duty-of-care",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_49063bd269a93f96",
+   "src": "ProcessFact:committee_formed_before_substantive_negotiation",
+   "dst": "Element:committee-ab-initio",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_8e9f4ddc304711f3",
+   "src": "ProcessFact:mom_vote_informed",
+   "dst": "Element:mom-informed",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_93ce07c4b0a67195",
+   "src": "ProcessFact:mom_vote_uncoerced",
+   "dst": "Element:mom-uncoerced",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_e36d027a7f4a409e",
+   "src": "ProcessFact:disinterested_stockholder_approval_obtained",
+   "dst": "Element:disinterested-stockholder-approval",
+   "edge_type": "satisfies",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Fact key mapped to element per Doc 00 s6.1.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1900-01-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_0b50a9a7a38e8a79",
+   "src": "Provision:de.dgcl.144b@2025-03-25",
+   "dst": "Source:de_code_online",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Statute published on Delaware Code Online (current text lags session laws).",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_14f64f03f82ce262",
+   "src": "Provision:de.dgcl.144c@2025-03-25",
+   "dst": "Source:de_code_online",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "high",
+    "rationale": "Statute published on Delaware Code Online (current text lags session laws).",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2025-03-25",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_dca79e1426ed8891",
+   "src": "Case:weinberger-v-uop-1983",
+   "dst": "Source:de_courts",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Opinion expected on courts.delaware.gov; primary URL not yet verified.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "1983-02-01",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_c59ed5e5889edf4f",
+   "src": "Case:kahn-v-m-and-f-worldwide-2014",
+   "dst": "Source:de_courts",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Opinion expected on courts.delaware.gov; primary URL not yet verified.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2014-03-14",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_48decdd905ba06f1",
+   "src": "Case:corwin-v-kkr-financial-holdings-2015",
+   "dst": "Source:de_courts",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Opinion expected on courts.delaware.gov; primary URL not yet verified.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2015-10-02",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_27e971b6eea01d6c",
+   "src": "Case:in-re-match-group-2024",
+   "dst": "Source:de_courts",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Opinion expected on courts.delaware.gov; primary URL not yet verified.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2024-04-04",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  },
+  {
+   "edge_id": "edge_80aa93f53cce10f9",
+   "src": "Case:rutledge-v-clearway-energy-group-2026",
+   "dst": "Source:de_courts",
+   "edge_type": "published_by",
+   "condition": null,
+   "props": {
+    "confidence_tier": "medium",
+    "rationale": "Opinion expected on courts.delaware.gov; primary URL not yet verified.",
+    "review_status": "draft_unreviewed"
+   },
+   "valid_from": null,
+   "valid_to": null,
+   "known_from": "2026-02-27",
+   "source_span": null,
+   "confidence": null,
+   "origin": "llm_extracted",
+   "audited": false
+  }
+ ]
+}

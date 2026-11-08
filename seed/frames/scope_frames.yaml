@@ -1,0 +1,81 @@
+- node_id: Provision:de.dgcl.144b@2025-03-25
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - other_controller_deal
+    applies_when: null
+    exceptions: []
+    non_application:
+      fact: litigation_commenced_on
+      lte: '2025-02-17'
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2025-03-25'
+    valid_to: null
+    source_spans: []
+    audited: false
+- node_id: Provision:de.dgcl.144c@2025-03-25
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - going_private
+    applies_when: null
+    exceptions: []
+    non_application:
+      fact: litigation_commenced_on
+      lte: '2025-02-17'
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2025-03-25'
+    valid_to: null
+    source_spans: []
+    audited: false
+- node_id: Provision:de.dgcl.144@2024-12-01
+  scope_frame:
+    addressee_classes:
+    - interested_director
+    transaction_types:
+    - interested_director
+    applies_when: null
+    exceptions: []
+    non_application: null
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '1967-03-01'
+    valid_to: null
+    source_spans: []
+    audited: false
+- node_id: Holding:mfw-2014
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - going_private
+    - other_controller_deal
+    applies_when: null
+    exceptions: []
+    non_application: null
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2014-06-24'
+    valid_to: null
+    source_spans: []
+    audited: false
+- node_id: Holding:match-group-2024
+  scope_frame:
+    addressee_classes:
+    - controller
+    transaction_types:
+    - going_private
+    - other_controller_deal
+    applies_when: null
+    exceptions: []
+    non_application: null
+    defined_terms: {}
+    jurisdiction: US-DE
+    valid_from: '2024-04-04'
+    valid_to: null
+    source_spans: []
+    audited: false
